@@ -8,6 +8,8 @@
     :root {
       --ink: #111827;
       --muted: #4b5563;
+      --active: #111827;
+      --danger: #cc1f1a;
       --line: #b8c3ca;
       --panel: #f1f1f1;
       --page: #e5e5e5;
@@ -40,15 +42,17 @@
     }
 
     .topbar {
-      height: 52px;
+      min-height: 50px;
       background: #ffffff;
-      border-bottom: 0;
+      border-bottom: 1px solid #c9d1d9;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding: 0 8px 0 0;
-      gap: 10px;
+      padding: 0 8px;
+      gap: 8px;
       box-shadow: none;
+      overflow-x: auto;
+      white-space: nowrap;
     }
 
     .top-accent {
@@ -61,21 +65,22 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       min-width: 0;
-      width: 172px;
-      padding-left: 8px;
+      width: auto;
+      padding-left: 0;
+      flex: 0 0 auto;
+      margin-right: 6px;
     }
 
     .mark {
-      width: 28px;
-      height: 28px;
+      width: 34px;
+      height: 34px;
       border-radius: 0;
-      background: #ffffff;
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-right: 0;
       border: 0;
       padding: 0;
       overflow: hidden;
@@ -90,16 +95,17 @@
 
     .brand h1 {
       margin: 0;
-      font-size: 10px;
+      font-size: 12px;
       line-height: 1.1;
       font-weight: 700;
-      color: #111827;
+      color: #1f2937;
       font-family: Nunito, sans-serif;
     }
 
     .brand span {
-      color: #374151;
-      font-size: 11px;
+      color: #1f2937;
+      font-size: 12px;
+      font-weight: 700;
       font-family: Nunito, sans-serif;
     }
 
@@ -123,44 +129,144 @@
     }
 
     .tabs {
-      height: 46px;
+      min-height: 50px;
       background: transparent;
       display: flex;
-      align-items: stretch;
+      align-items: center;
       padding: 0;
-      gap: 0;
+      gap: 2px;
       overflow-x: auto;
       border-bottom: 0;
+      white-space: nowrap;
+      flex: 1;
     }
 
     .tab {
-      color: #000000;
+      color: #111827;
       text-decoration: none;
-      padding: 0 11px;
-      display: flex;
+      padding: 16px 10px 14px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
-      font-weight: 600;
-      border-bottom: 0;
+      font-size: 12px;
+      font-weight: 700;
+      border-bottom: 2px solid transparent;
       white-space: nowrap;
       border-radius: 0;
       margin: 0;
-      transition: none;
+      transition: border-color 120ms ease, color 120ms ease;
       font-family: Nunito, sans-serif;
+      flex: 0 0 auto;
     }
 
     .tab:hover {
       background: #ffffff;
       color: #000000;
+      border-bottom-color: #9ca3af;
     }
 
     .tab.active {
       background: #ffffff;
-      color: #000000;
+      color: #111827;
       font-weight: 700;
       box-shadow: none;
-      border-bottom: 4px solid var(--teal);
+      border-bottom-color: #111827;
+    }
+
+    .tab.alert {
+      color: var(--danger);
+      margin-left: auto;
+    }
+
+    .ht-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      margin: 8px 0;
+      overflow-x: auto;
+    }
+
+    .ht-tab {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      color: #374151;
+      font-size: 10px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: 1px solid transparent;
+      border-bottom: 0;
+      white-space: nowrap;
+    }
+
+    .ht-tab.active {
+      background: #f2f4f7;
+      border-color: #b9c3cc;
+      border-bottom-color: #f2f2f2;
+    }
+
+    .ht-tab-panel {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .ht-tab-panel.active {
+      display: block;
+    }
+
+    .hivt-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .hivt-chart {
+      border: 1px solid var(--line);
+      background: #f4f4f4;
+      min-height: 220px;
+    }
+
+    .hivt-chart h4 {
+      margin: 0;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 10px;
+      text-transform: uppercase;
+      text-align: center;
+      font-family: Nunito, sans-serif;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .hivt-chart-body {
+      min-height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      border-top: 3px solid #00a79d;
+      background: linear-gradient(180deg, #f8f8f8 0%, #efefef 100%);
+    }
+
+    .breadcrumb-bar {
+      min-height: 34px;
+      border-bottom: 1px solid #c9d1d9;
+      background: #f4f6f8;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+    }
+
+    .breadcrumb-bar .crumbs {
+      margin: 0;
+      color: #0072bc;
+      font-size: 12px;
+      font-family: Nunito, sans-serif;
+      white-space: nowrap;
     }
 
     .profile-dot {
@@ -197,35 +303,40 @@
     }
 
     .subtabs {
-      height: 46px;
-      display: flex;
-      align-items: flex-end;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
       gap: 0;
-      border: 1px solid var(--line);
-      background: #d7d7d7;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       overflow-x: auto;
-      margin-bottom: 10px;
+      margin: 0;
     }
 
     .subtab {
-      height: 45px;
+      min-height: 38px;
       display: flex;
       align-items: center;
-      padding: 0 22px;
-      border-right: 1px solid #aeb7be;
-      color: #111827;
-      font-size: 11px;
+      padding: 0 14px;
+      border-right: 0;
+      color: #374151;
+      font-size: 10px;
       text-decoration: none;
       text-transform: uppercase;
       white-space: nowrap;
+      font-weight: 600;
+      letter-spacing: 0;
       font-family: Nunito, sans-serif;
+      border: 1px solid transparent;
+      border-bottom: 0;
     }
 
     .subtab.active {
-      border-right: 1px solid #aeb7be;
-      color: #111827;
-      background: #eeeeee;
-      border-bottom: 4px solid var(--teal);
+      color: #374151;
+      background: #f2f4f7;
+      border-color: #b9c3cc;
+      border-bottom-color: #f2f2f2;
     }
 
     .tab-panel {
@@ -237,7 +348,7 @@
     }
 
     .page {
-      padding: 6px 8px 20px;
+      padding: 10px 8px 20px;
       max-width: none;
       margin: 0 auto;
       border-left: 0;
@@ -311,12 +422,13 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 8px 22px;
-      background: transparent;
-      border: 0;
+      background: #f2f2f2;
+      border: 1px solid #bcc6ce;
       border-radius: 0;
-      padding: 0 0 8px;
+      padding: 8px 10px 10px;
       box-shadow: none;
       margin-bottom: 8px;
+      border-bottom: 6px solid #00a79d;
     }
 
     .definition {
@@ -404,13 +516,13 @@
     .field select,
     .field input {
       width: 100%;
-      height: 32px;
-      border: 1px solid #c6cfd6;
+      height: 24px;
+      border: 1px solid #c3cad3;
       border-radius: 2px;
-      padding: 0 10px;
+      padding: 0 8px;
       color: #374151;
       background: #ffffff;
-      font-size: 11px;
+      font-size: 10px;
     }
 
     .apply {
@@ -425,12 +537,12 @@
     }
 
     .kpi {
-      background: #f0f0f0;
-      border: 1px solid var(--line);
+      background: #e7e7e7;
+      border: 1px solid #bcc6ce;
       border-radius: 2px;
       padding: 0;
       min-height: 120px;
-      box-shadow: var(--shadow-soft);
+      box-shadow: none;
       text-align: center;
       overflow: hidden;
       transition: none;
@@ -523,11 +635,17 @@
     }
 
     .panel {
-      background: #f2f2f2;
-      border: 1px solid var(--line);
+      background: #ececec;
+      border: 1px solid #bcc6ce;
       border-radius: 2px;
-      box-shadow: var(--shadow-soft);
+      box-shadow: none;
       overflow: hidden;
+    }
+
+    .muted-note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--muted);
     }
 
     .section-gap {
@@ -537,8 +655,8 @@
     .panel-header {
       min-height: 42px;
       padding: 10px 12px;
-      border-bottom: 1px solid var(--line);
-      background: #f2f2f2;
+      border-bottom: 1px solid #bcc6ce;
+      background: #ececec;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -566,7 +684,7 @@
       color: #1f2937;
       line-height: 1.6;
       font-size: 13px;
-      background: #f2f2f2;
+      background: #ececec;
     }
 
     .panel-body ul {
@@ -1392,17 +1510,26 @@
     @media (max-width: 760px) {
       .topbar {
         height: auto;
-        padding: 12px 14px;
+        padding: 8px 12px;
         align-items: flex-start;
         gap: 10px;
       }
 
-      .user-tools {
-        display: none;
+      .tabs {
+        min-height: auto;
+        gap: 0;
       }
 
-      .tabs {
-        padding: 0 6px;
+      .breadcrumb-bar {
+        overflow-x: auto;
+      }
+
+      .tab.alert {
+        margin-left: 0;
+      }
+
+      .hivt-chart-grid {
+        grid-template-columns: 1fr;
       }
 
       .page {
@@ -1641,31 +1768,31 @@
   <header class="topbar">
     <div class="brand">
       <div class="mark">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coat_of_arms_of_Kenya_(Official).svg?width=80" alt="Kenya Coat of Arms">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coat_of_arms_of_Kenya_(Official).svg?width=80" alt="Integrated Data Warehouse">
       </div>
       <div>
-        <h1>National</h1>
+        <h1>Integrated</h1>
         <span>Data Warehouse</span>
       </div>
     </div>
     <nav class="tabs" aria-label="Primary">
-      <a class="tab" href="#">Home</a>
-      <a class="tab" href="#">Reporting Rates</a>
-      <a class="tab" href="#">HIV Testing &amp; Prevention</a>
-      <a class="tab" href="#">HIV Treatment</a>
-      <a class="tab active" href="#">VTP</a>
-      <a class="tab" href="#">Service Desk</a>
-      <a class="tab" href="#">Resources</a>
-      <a class="tab" href="#">Case Surveillance Dashboard</a>
-      <a class="tab" href="#" style="color:#e60000;">Clear Cached Data</a>
+      <a class="tab active" href="#top">Home</a>
+      <a class="tab" href="#reporting-rates">Reporting Rates</a>
+      <a class="tab" href="#hiv-testing-prevention">HIV Testing &amp; Prevention</a>
+      <a class="tab" href="#service-desk">Service Desk</a>
+      <a class="tab" href="#resources">Resources</a>
+      <a class="tab" href="#case-surveillance-dashboard">Case Surveillance Dashboard</a>
+      <a class="tab alert" href="#clear-cache">Clear Cached Data</a>
     </nav>
     <div class="user-tools">
       <span class="profile-dot" aria-label="User profile"></span>
     </div>
   </header>
-  <div class="top-accent" aria-hidden="true"></div>
+  <div class="breadcrumb-bar" aria-label="Breadcrumb">
+    <p class="crumbs">Home / HIV Testing &amp; Prevention / HIV Testing &amp; Prevention</p>
+  </div>
 
-  <main class="page">
+  <main class="page" id="top">
     <nav class="subtabs" aria-label="VTP sections">
       <a class="subtab active" href="#triple-elimination" data-tab="triple-elimination">Triple Testing</a>
       <a class="subtab" href="#early-infant-diagnosis" data-tab="early-infant-diagnosis">Early Infant Diagnosis</a>
@@ -2036,7 +2163,7 @@
       </section>
       <section class="panel section-gap" aria-label="Triple testing glossary">
         <div class="panel-header">
-          <h3>Definition of terms</h3>
+          <h3>Glossary</h3>
         </div>
         <div class="table-scroll">
           <table class="indicator-table glossary-table">
@@ -2267,7 +2394,7 @@
       </section>
       <section class="panel section-gap" aria-label="Early infant diagnosis glossary">
         <div class="panel-header">
-          <h3>Definition of terms</h3>
+          <h3>Glossary</h3>
         </div>
         <div class="table-scroll">
           <table class="indicator-table glossary-table">
@@ -2465,7 +2592,7 @@
       </section>
       <section class="panel section-gap" aria-label="Viral load glossary">
         <div class="panel-header">
-          <h3>Definition of terms</h3>
+          <h3>Glossary</h3>
         </div>
         <div class="table-scroll">
           <table class="indicator-table glossary-table">
@@ -2623,6 +2750,8 @@
   <script>
     const subTabs = document.querySelectorAll('.subtab');
     const tabPanels = document.querySelectorAll('.tab-panel');
+    const hivTreatmentTabs = document.querySelectorAll('.ht-tab');
+    const hivTreatmentPanels = document.querySelectorAll('.ht-tab-panel');
 
     subTabs.forEach((tab) => {
       tab.addEventListener('click', (event) => {
@@ -2631,6 +2760,23 @@
 
         subTabs.forEach((item) => item.classList.remove('active'));
         tabPanels.forEach((panel) => panel.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(panelId).classList.add('active');
+      });
+    });
+
+    hivTreatmentTabs.forEach((tab) => {
+      tab.addEventListener('click', (event) => {
+        event.preventDefault();
+        const panelId = tab.dataset.htTab;
+
+        if (!panelId) {
+          return;
+        }
+
+        hivTreatmentTabs.forEach((item) => item.classList.remove('active'));
+        hivTreatmentPanels.forEach((panel) => panel.classList.remove('active'));
 
         tab.classList.add('active');
         document.getElementById(panelId).classList.add('active');
