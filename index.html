@@ -1,31 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>National Data Warehouse | VTP Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NDWH Kenya Dashboard Mockup</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     :root {
-      --ink: #111827;
-      --muted: #4b5563;
-      --active: #111827;
-      --danger: #cc1f1a;
-      --line: #b8c3ca;
-      --panel: #f1f1f1;
-      --page: #e5e5e5;
-      --nav: #ffffff;
-      --nav-dark: #d9d9d9;
-      --teal: #00a79d;
-      --teal-dark: #078f88;
-      --amber: #f38b00;
-      --red: #f86c6b;
-      --green: #00a651;
-      --blue-soft: #eaf3f8;
-      --teal-soft: #e8f7f5;
-      --amber-soft: #fff4e5;
-      --red-soft: #fff0f0;
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
-      --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.12);
+      --bg: #efefef;
+      --panel: #ffffff;
+      --line: #cbd3d8;
+      --ink: #0d1a23;
+      --teal: #00b9ab;
+      --orange: #ef7f1a;
+      --green: #0ea34a;
+      --focus: #0a84ff;
     }
 
     * {
@@ -34,2808 +26,2149 @@
 
     body {
       margin: 0;
+      background: var(--bg);
+      font-family: "Segoe UI", Tahoma, sans-serif;
       color: var(--ink);
-      background: var(--page);
-      font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
       font-size: 12px;
-      letter-spacing: 0;
     }
 
-    .topbar {
-      min-height: 50px;
-      background: #ffffff;
-      border-bottom: 1px solid #c9d1d9;
+    .container {
+      width: 100%;
+      margin: 0;
+      padding: 0 8px;
+    }
+
+    .top-nav {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      gap: 16px;
+      min-height: 34px;
+      background: #fff;
+      border-bottom: 4px solid var(--teal);
       padding: 0 8px;
-      gap: 8px;
-      box-shadow: none;
+      font-size: 10px;
+      font-weight: 600;
       overflow-x: auto;
       white-space: nowrap;
-    }
-
-    .top-accent {
-      height: 5px;
-      width: 100%;
-      background: var(--teal-dark);
-      border-bottom: 1px solid #087d77;
+      position: sticky;
+      top: 0;
+      z-index: 40;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-      width: auto;
-      padding-left: 0;
-      flex: 0 0 auto;
-      margin-right: 6px;
-    }
-
-    .mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 0;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .mark img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 12px;
+      font-size: 9px;
       line-height: 1.1;
       font-weight: 700;
-      color: #1f2937;
-      font-family: Nunito, sans-serif;
-    }
-
-    .brand span {
-      color: #1f2937;
-      font-size: 12px;
-      font-weight: 700;
-      font-family: Nunito, sans-serif;
-    }
-
-    .user-tools {
-      margin-left: auto;
+      color: #334;
       padding-right: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 12px;
+      border-right: 1px solid #ddd;
     }
 
-    .pill {
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 5px 10px;
-      background: #ffffff;
-      color: #374151;
-      white-space: nowrap;
-    }
-
-    .tabs {
-      min-height: 50px;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      padding: 0;
-      gap: 2px;
-      overflow-x: auto;
-      border-bottom: 0;
-      white-space: nowrap;
-      flex: 1;
-    }
-
-    .tab {
-      color: #111827;
+    .top-nav a {
       text-decoration: none;
-      padding: 16px 10px 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
+      color: #1d2e38;
+      padding: 4px 2px;
       border-bottom: 2px solid transparent;
-      white-space: nowrap;
-      border-radius: 0;
-      margin: 0;
-      transition: border-color 120ms ease, color 120ms ease;
-      font-family: Nunito, sans-serif;
-      flex: 0 0 auto;
     }
 
-    .tab:hover {
-      background: #ffffff;
-      color: #000000;
-      border-bottom-color: #9ca3af;
+    .top-nav a.active {
+      color: #10232f;
+      border-bottom-color: var(--teal);
     }
 
-    .tab.active {
-      background: #ffffff;
-      color: #111827;
-      font-weight: 700;
-      box-shadow: none;
-      border-bottom-color: #111827;
+    .top-nav a.warn {
+      color: #e64b28;
     }
 
-    .tab.alert {
-      color: var(--danger);
-      margin-left: auto;
-    }
-
-    .ht-tabs {
-      display: inline-flex;
-      align-items: center;
-      gap: 0;
-      margin: 8px 0;
-      overflow-x: auto;
-    }
-
-    .ht-tab {
-      min-height: 38px;
-      display: flex;
-      align-items: center;
-      padding: 0 14px;
-      color: #374151;
-      font-size: 10px;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-weight: 600;
-      border: 1px solid transparent;
-      border-bottom: 0;
-      white-space: nowrap;
-    }
-
-    .ht-tab.active {
-      background: #f2f4f7;
-      border-color: #b9c3cc;
-      border-bottom-color: #f2f2f2;
-    }
-
-    .ht-tab-panel {
-      display: none;
+    .mode-bar {
       margin-top: 8px;
-    }
-
-    .ht-tab-panel.active {
-      display: block;
-    }
-
-    .hivt-chart-grid {
+      background: #f7f7f7;
+      border: 1px solid var(--line);
+      height: 30px;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .hivt-chart {
-      border: 1px solid var(--line);
-      background: #f4f4f4;
-      min-height: 220px;
-    }
-
-    .hivt-chart h4 {
-      margin: 0;
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--line);
-      font-size: 10px;
-      text-transform: uppercase;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
       text-align: center;
-      font-family: Nunito, sans-serif;
       font-weight: 700;
-      color: #111827;
-    }
-
-    .hivt-chart-body {
-      min-height: 170px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 12px;
-      border-top: 3px solid #00a79d;
-      background: linear-gradient(180deg, #f8f8f8 0%, #efefef 100%);
-    }
-
-    .breadcrumb-bar {
-      min-height: 34px;
-      border-bottom: 1px solid #c9d1d9;
-      background: #f4f6f8;
-      display: flex;
-      align-items: center;
-      padding: 0 8px;
-    }
-
-    .breadcrumb-bar .crumbs {
-      margin: 0;
-      color: #0072bc;
-      font-size: 12px;
-      font-family: Nunito, sans-serif;
-      white-space: nowrap;
-    }
-
-    .profile-dot {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #000000;
-      display: inline-block;
-      position: relative;
-    }
-
-    .profile-dot::before,
-    .profile-dot::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 1px solid #ffffff;
-    }
-
-    .profile-dot::before {
-      top: 5px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-    }
-
-    .profile-dot::after {
-      bottom: 4px;
-      width: 10px;
-      height: 5px;
-      border-radius: 8px 8px 0 0;
-      border-bottom: 0;
-    }
-
-    .subtabs {
-      min-height: 40px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-      overflow-x: auto;
-      margin: 0;
-    }
-
-    .subtab {
-      min-height: 38px;
-      display: flex;
-      align-items: center;
-      padding: 0 14px;
-      border-right: 0;
-      color: #374151;
       font-size: 10px;
-      text-decoration: none;
-      text-transform: uppercase;
-      white-space: nowrap;
-      font-weight: 600;
-      letter-spacing: 0;
-      font-family: Nunito, sans-serif;
-      border: 1px solid transparent;
-      border-bottom: 0;
+      letter-spacing: 0.2px;
     }
 
-    .subtab.active {
-      color: #374151;
-      background: #f2f4f7;
-      border-color: #b9c3cc;
-      border-bottom-color: #f2f2f2;
-    }
-
-    .tab-panel {
-      display: none;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    .page {
-      padding: 10px 8px 20px;
-      max-width: none;
-      margin: 0 auto;
-      border-left: 0;
-      border-right: 0;
-      background: transparent;
-      backdrop-filter: none;
-    }
-
-    .title-row {
-      display: block;
-      margin-bottom: 8px;
-      border: 1px solid var(--line);
-      border-radius: 0;
-      background: #dddddd;
-      padding: 0;
-      box-shadow: none;
-      overflow: visible;
-    }
-
-    .title-row h2 {
-      margin: 0;
-      min-height: 42px;
-      display: flex;
-      align-items: center;
-      padding-left: 14px;
-      background: #dddddd;
-      border-top: 0;
-      border-bottom: 0;
-      font-size: 17px;
-      line-height: 1.2;
-      color: #000000;
-      text-transform: uppercase;
-      letter-spacing: 0;
-      font-family: Nunito, sans-serif;
-    }
-
-    .title-row p {
-      display: none;
-    }
-
-    .actions {
-      display: none;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    button,
-    select,
-    input {
-      font: inherit;
-    }
-
-    .button {
-      border: 1px solid var(--line);
-      background: #ffffff;
-      color: #24445e;
-      min-height: 34px;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .button.primary {
-      border-color: var(--nav);
-      background: var(--nav);
-      color: #000000;
+    .mode-bar .split {
+      border-left: 3px solid #1f1f1f;
+      border-right: 3px solid #1f1f1f;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      color: #7d8a95;
+      font-size: 9px;
+      font-weight: 500;
     }
 
     .filters {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 8px 22px;
-      background: #f2f2f2;
-      border: 1px solid #bcc6ce;
-      border-radius: 0;
-      padding: 8px 10px 10px;
-      box-shadow: none;
-      margin-bottom: 8px;
-      border-bottom: 6px solid #00a79d;
+      gap: 14px;
+      margin-top: 10px;
     }
 
-    .definition {
+    .filter {
+      display: grid;
+      gap: 3px;
+    }
+
+    .filter label {
+      font-size: 8px;
+      color: #4f5c67;
+    }
+
+    .select {
       border: 1px solid var(--line);
-      margin: 10px 0 16px;
-      background: #ffffff;
-      border-radius: 0;
-      overflow: hidden;
-      box-shadow: none;
-    }
-
-    .definition h3 {
-      margin: 0;
-      padding: 10px 14px;
-      background: #f7fafc;
-      border-bottom: 1px solid var(--line);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .definition ul {
-      margin: 0;
-      padding: 18px 34px 22px;
-      font-size: 13px;
-    }
-
-    .definition li {
-      margin: 0;
-    }
-
-    .definition > ul {
-      list-style: none;
-      padding: 14px 16px 16px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .definition > ul > li.def-aligned {
-      display: grid;
-      grid-template-columns: minmax(190px, 280px) 10px 1fr;
-      column-gap: 8px;
-      align-items: start;
-      line-height: 1.35;
-    }
-
-    .definition .def-term {
-      font-weight: 600;
-      color: #0f172a;
-    }
-
-    .definition .def-colon {
-      text-align: center;
-      color: #0f172a;
-      font-weight: 600;
-    }
-
-    .definition .def-desc {
-      color: #1f2937;
-      min-width: 0;
-    }
-
-    .definition > ul > li.def-aligned > ul {
-      grid-column: 3;
-      margin: 6px 0 0;
-      padding-left: 18px;
-      list-style: disc;
-      display: block;
-    }
-
-    .definition ul ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 4px;
-      color: #1f2937;
-      font-size: 10px;
-      font-weight: 500;
-      text-transform: none;
-      font-family: Nunito, sans-serif;
-    }
-
-    .field select,
-    .field input {
-      width: 100%;
-      height: 24px;
-      border: 1px solid #c3cad3;
-      border-radius: 2px;
-      padding: 0 8px;
-      color: #374151;
-      background: #ffffff;
-      font-size: 10px;
-    }
-
-    .apply {
-      display: none;
-    }
-
-    .kpis {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .kpi {
-      background: #e7e7e7;
-      border: 1px solid #bcc6ce;
-      border-radius: 2px;
-      padding: 0;
-      min-height: 120px;
-      box-shadow: none;
-      text-align: center;
-      overflow: hidden;
-      transition: none;
-    }
-
-    .kpi small {
-      display: block;
-      color: #000000;
-      line-height: 1.2;
-      min-height: 30px;
-      padding: 12px 10px 6px;
-      background: #f0f0f0;
-      border-bottom: 0;
-      font-size: 11px;
-      text-transform: uppercase;
-      font-weight: 600;
-      font-family: Nunito, sans-serif;
-    }
-
-    .kpi strong {
-      display: inline-block;
-      margin-top: 14px;
-      font-size: 46px;
-      font-weight: 400;
-      color: #000000;
-      font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    }
-
-    .kpi .delta {
-      display: inline-block;
-      margin-left: 10px;
-      font-size: 16px;
-      color: var(--green);
-    }
-
-    .eid-cascade-note {
-      margin: 12px 0 14px;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      background: #f8fafc;
-      font-size: 12px;
-      color: #1f2937;
-    }
-
-    .eid-cascade .kpi {
-      padding-bottom: 10px;
-    }
-
-    .eid-cascade .kpi .delta {
-      display: block;
-      margin: 6px 10px 0;
-      font-size: 13px;
-      line-height: 1.3;
-      color: #1f2937;
-    }
-
-    .eid-cascade .kpi .delta-meta {
-      display: block;
-      margin: 2px 10px 0;
-      font-size: 12px;
-      line-height: 1.25;
-      color: var(--muted);
-    }
-
-    .eid-cascade .kpi.high-gap {
-      border-color: var(--amber);
-      background: var(--amber-soft);
-    }
-
-    .eid-cascade .kpi.critical-gap {
-      border-color: var(--red);
-      background: var(--red-soft);
-    }
-
-    .eid-cascade .kpi .delta.warn {
-      color: var(--amber);
-      font-weight: 700;
-    }
-
-    .eid-cascade .kpi .delta.critical {
-      color: var(--red);
-      font-weight: 700;
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1.45fr .85fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .panel {
-      background: #ececec;
-      border: 1px solid #bcc6ce;
-      border-radius: 2px;
-      box-shadow: none;
-      overflow: hidden;
-    }
-
-    .muted-note {
-      margin-top: 6px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .section-gap {
-      margin-top: 12px;
-    }
-
-    .panel-header {
-      min-height: 42px;
-      padding: 10px 12px;
-      border-bottom: 1px solid #bcc6ce;
-      background: #ececec;
+      height: 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      padding: 0 7px;
+      color: #97a3ac;
+      background: #fff;
+      font-size: 8px;
     }
 
-    .panel-header h3 {
-      margin: 0;
-      font-size: 12px;
-      color: #111827;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0;
-      font-family: Nunito, sans-serif;
+    .select::after {
+      content: "\25BE";
+      color: #7a8792;
+      font-size: 8px;
     }
 
-    .panel-header span {
-      color: var(--muted);
-      font-size: 11px;
-      white-space: nowrap;
-    }
-
-    .panel-body {
-      padding: 12px 14px;
-      color: #1f2937;
-      line-height: 1.6;
-      font-size: 13px;
-      background: #ececec;
-    }
-
-    .panel-body ul {
-      margin: 0.8rem 0 0 1.2rem;
-      padding: 0;
-    }
-
-    .panel-body li {
-      margin: 0.45rem 0;
-    }
-
-    .indicator-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .indicator-table th {
-      background: #e6e6e6;
-      color: #111827;
-      text-align: left;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .2px;
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--line);
-      font-family: Nunito, sans-serif;
-    }
-
-    .indicator-table td {
-      padding: 8px 10px;
-      border-bottom: 1px solid #d7dee3;
-      vertical-align: middle;
-      text-align: center;
-    }
-
-    .indicator-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .indicator-table td:nth-child(1) {
-      text-align: left;
-    }
-
-    .indicator-table td:nth-child(2),
-    .indicator-table td:nth-child(3),
-    .indicator-table td:nth-child(4),
-    .indicator-table td:nth-child(5) {
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
-    }
-
-    .glossary-table td {
-      text-align: left;
-      white-space: normal;
-    }
-
-    .glossary-table td:nth-child(2),
-    .glossary-table td:nth-child(3),
-    .glossary-table td:nth-child(4),
-    .glossary-table td:nth-child(5) {
-      white-space: normal;
-    }
-
-    .group {
-      background: #f0f6fb;
-      color: #17334b;
-      font-weight: 700;
-    }
-
-    .group td {
-      padding-top: 12px;
-      padding-bottom: 12px;
-    }
-
-    .tag {
-      display: inline-block;
-      min-width: 0;
-      border-radius: 0;
-      padding: 0;
-      font-size: 12px;
-      font-weight: 700;
-      background: transparent;
-    }
-
-    .tag.good {
-      background: transparent;
-      color: var(--green);
-    }
-
-    .tag.watch {
-      background: transparent;
-      color: var(--amber);
-    }
-
-    .tag.risk {
-      background: transparent;
-      color: var(--red);
-    }
-
-    .suppression-pie-wrap {
-      display: grid;
-      grid-template-columns: minmax(220px, 280px) 1fr;
-      gap: 20px;
-      align-items: center;
-      padding: 16px;
-    }
-
-    .suppression-pie {
-      --suppressed: 69.8;
-      width: 220px;
-      height: 220px;
-      margin: 0 auto;
-      border-radius: 50%;
-      position: relative;
-      background: conic-gradient(var(--green) 0 calc(var(--suppressed) * 1%), var(--red) calc(var(--suppressed) * 1%) 100%);
-      border: 1px solid var(--line);
-    }
-
-    .suppression-pie::before {
-      content: "";
-      position: absolute;
-      inset: 32px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-    }
-
-    .suppression-pie-center {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      z-index: 1;
-      color: #111827;
-    }
-
-    .suppression-pie-center strong {
-      font-size: 30px;
-      line-height: 1;
-      font-weight: 700;
-      color: #000000;
-    }
-
-    .suppression-pie-center small {
+    .filters-bottom {
       margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .3px;
+      width: 16.4%;
     }
 
-    .suppression-legend {
+    .kpis {
+      margin-top: 8px;
       display: grid;
-      gap: 10px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
     }
 
-    .suppression-legend-item {
-      display: grid;
-      grid-template-columns: 14px 1fr auto;
-      align-items: center;
-      gap: 10px;
+    .card {
+      background: var(--panel);
       border: 1px solid var(--line);
-      padding: 10px 12px;
-      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
+      min-height: 112px;
+      padding: 10px;
+      position: relative;
     }
 
-    .suppression-legend-item strong {
-      display: block;
-      font-size: 13px;
+    .kpi-title {
+      text-transform: uppercase;
+      font-size: 11px;
+      text-align: center;
+      margin: 0;
+      color: #0a0f15;
+    }
+
+    .kpi-value {
+      font-size: 44px;
+      text-align: center;
+      margin: 16px 0 0;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .kpi-percent {
+      color: var(--green);
+      text-align: right;
+      font-size: 24px;
+      margin: 0;
       font-weight: 700;
-      color: #111827;
+      position: absolute;
+      top: 40px;
+      right: 10px;
     }
 
-    .suppression-legend-item small {
-      display: block;
-      margin-top: 3px;
-      color: #4b5563;
-      font-size: 12px;
-    }
-
-    .suppression-swatch {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 0, 0, 0.15);
-    }
-
-    .suppression-swatch.suppressed {
-      background: var(--green);
-    }
-
-    .suppression-swatch.unsuppressed {
-      background: var(--red);
-    }
-
-    .side-stack {
+    .bottom-grid {
+      margin-top: 10px;
       display: grid;
-      gap: 16px;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 14px;
+      grid-template-columns: 24.4% 50% 25.6%;
+      gap: 14px;
+      align-items: start;
     }
 
     .mini {
+      min-height: 92px;
+      margin-bottom: 12px;
+      background: #fff;
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px;
-      background: #ffffff;
-      min-height: 94px;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
+      padding: 9px;
     }
 
-    .mini small {
-      color: #111827;
-      display: block;
-      line-height: 1.3;
+    .mini h4 {
+      margin: 0;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .mini p {
+      margin: 3px 0 0;
+      font-size: 8px;
+      color: #4f5c67;
+      text-transform: uppercase;
     }
 
     .mini strong {
       display: block;
-      margin-top: 8px;
-      font-size: 30px;
-      font-weight: 400;
-      color: #000000;
+      text-align: right;
+      color: var(--orange);
+      font-size: 52px;
+      font-weight: 500;
+      margin-top: 2px;
+      line-height: 1;
     }
 
-    .bars {
-      padding: 12px;
-      display: grid;
-      gap: 12px;
-      background: #efefef;
-    }
-
-    .bar-row {
-      display: grid;
-      gap: 6px;
-    }
-
-    .bar-group {
+    .map-panel {
+      background: #fff;
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 10px;
-      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
+      min-height: 296px;
+      display: grid;
+      grid-template-rows: auto 1fr;
     }
 
-    .bar-group + .bar-group {
+    .tabs {
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 18px;
+      padding: 6px 8px;
+      font-size: 10px;
+      color: #4f5c67;
+      text-transform: uppercase;
+    }
+
+    .tabs span:first-child {
+      color: #3b5568;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .map-stage {
+      display: grid;
+      place-items: center;
+      background: #fafafa;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kenya-shape {
+      width: 180px;
+      height: 220px;
+      clip-path: polygon(28% 8%, 48% 1%, 62% 10%, 74% 10%, 84% 18%, 80% 30%, 90% 42%, 82% 55%, 81% 70%, 75% 79%, 77% 94%, 64% 100%, 52% 92%, 39% 88%, 25% 78%, 22% 63%, 14% 53%, 15% 38%, 8% 27%, 19% 18%);
+      background: radial-gradient(circle at 34% 44%, #2f2f38 0 12%, #57df86 13% 16%, #2f2f38 17% 33%, #2f2f38 34% 100%);
+      box-shadow: inset 0 0 0 2px #d8d8d8;
+      opacity: 0.92;
+    }
+
+    .panel-text {
+      min-height: 296px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
+      padding: 12px;
+      font-size: 10px;
+      line-height: 1.45;
+      color: #1f2f3c;
+    }
+
+    .panel-text h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .panel-text ul {
+      margin: 6px 0 12px 16px;
+      padding: 0;
+    }
+
+    .panel-text li {
+      margin-bottom: 3px;
+    }
+
+    .footer-line {
+      margin-top: 18px;
+      border-top: 6px solid var(--teal);
+      height: 22px;
+      background: #f7f7f7;
+      color: #808a93;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      font-size: 8px;
+    }
+
+    .content-sections {
+      margin-top: 12px;
+      display: none;
+      gap: 12px;
+    }
+
+    body.show-hiv-treatment .mode-bar,
+    body.show-hiv-treatment .filters,
+    body.show-hiv-treatment .filters-bottom,
+    body.show-hiv-treatment .kpis,
+    body.show-hiv-treatment .bottom-grid {
+      display: none;
+    }
+
+    body.show-hiv-treatment .content-sections {
+      display: grid;
+    }
+
+    .section-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
+      padding: 12px;
+    }
+
+    .section-card h3 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .section-card p {
+      margin: 0;
+      font-size: 11px;
+      color: #243744;
+      line-height: 1.5;
+    }
+
+    .hiv-panel {
+      border: 1px solid var(--line);
+      background: #f4f6f8;
+      padding: 8px;
+    }
+
+    .hiv-subtabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+      position: sticky;
+      top: 38px;
+      z-index: 20;
+      background: #f4f6f8;
+    }
+
+    .hiv-tab {
+      border: 0;
+      background: transparent;
+      font-size: 9px;
+      text-transform: uppercase;
+      color: #4f5c67;
+      padding: 6px 4px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      min-height: 28px;
+    }
+
+    .hiv-tab.active {
+      color: #112532;
+      border-bottom-color: var(--teal);
+      font-weight: 700;
+    }
+
+    .hiv-view {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 10px;
+    }
+
+    .hiv-view.active {
+      display: block;
+    }
+
+    .vl-subtabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+
+    .vl-tab {
+      border: 0;
+      background: transparent;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #4f5c67;
+      padding: 6px 5px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      min-height: 30px;
+      font-weight: 700;
+    }
+
+    .vl-tab.active {
+      color: #112532;
+      border-bottom-color: var(--teal);
+    }
+
+    .vl-view {
+      display: none;
+    }
+
+    .vl-view.active {
+      display: block;
+    }
+
+    .hiv-banner {
+      border-top: 6px solid var(--teal);
+      border-bottom: 1px solid var(--line);
+      background: #fdfdfd;
+      padding: 9px;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hiv-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 10px;
       margin-top: 10px;
     }
 
-    .bar-group h4 {
-      margin: 0 0 10px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #15324a;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-
-    .bar-label {
-      display: flex;
-      justify-content: space-between;
-      color: #334155;
-      font-size: 12px;
-      gap: 8px;
-    }
-
-    .track {
-      height: 9px;
-      background: #d6dde3;
-      border-radius: 0;
-      overflow: hidden;
-    }
-
-    .fill {
-      height: 100%;
-      border-radius: 0;
-      background: var(--teal);
-    }
-
-    .bullet-row {
-      display: grid;
-      gap: 8px;
-    }
-
-    .bullet-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #334155;
-      font-size: 13px;
-      gap: 8px;
-    }
-
-    .bullet-track {
-      height: 18px;
-      background: #e8eef5;
-      border-radius: 999px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bullet-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: var(--teal);
-    }
-
-    .bullet-fill.amber {
-      background: var(--amber);
-    }
-
-    .bullet-fill.red {
-      background: var(--red);
-    }
-
-    .bullet-target {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 5%;
-      width: 2px;
-      background: rgba(51, 65, 85, 0.65);
-    }
-
-    .bullet-meta {
-      display: flex;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 11px;
-      gap: 8px;
-    }
-
-    .vertical-chart {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      align-items: flex-end;
-      padding: 18px 14px 16px;
-    }
-
-    .vertical-chart.two-cols {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .vtp-chart-wrap {
-      padding: 14px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .vtp-chart-group {
+    .hiv-kpi {
       border: 1px solid var(--line);
-      border-radius: 10px;
-      background: #ffffff;
-      padding: 10px 12px 12px;
+      padding: 8px;
+      background: #fcfcfc;
+      transition: box-shadow 0.2s ease;
     }
 
-    .vtp-chart-group h4 {
-      margin: 0 0 10px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #15324a;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
+    .hiv-kpi:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
-    .vtp-columns {
-      min-height: 220px;
-      display: grid;
-      align-items: end;
-      gap: 14px;
-      padding: 8px 8px 6px;
-      border: 1px solid #e2ebf3;
-      border-radius: 8px;
-      background-image: linear-gradient(to top, #edf2f7 1px, transparent 1px);
-      background-size: 100% 20%;
-      background-color: #f9fcff;
-    }
-
-    .vtp-columns.two {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .vtp-columns.three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .vtp-col {
-      display: grid;
-      justify-items: center;
-      align-content: end;
-      gap: 6px;
-      min-height: 340px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .vtp-col-plot {
-      width: 66px;
-      height: 250px;
-      background: #d7dee3;
-      border: 1px solid #c5ced6;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .vtp-col-bar {
-      width: 100%;
-      min-height: 18px;
-      border-radius: 0;
-      background: #5ea9d8;
-      box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 700;
-      padding-bottom: 4px;
-    }
-
-    .vtp-col-bar.navy {
-      background: #0f2f66;
-    }
-
-    .vtp-col-bar.blue {
-      background: #5ea9d8;
-    }
-
-    .vtp-col-bar.orange {
-      background: #d18211;
-    }
-
-    .vtp-col-value {
-      font-size: 12px;
-      font-weight: 700;
-      color: #1a3650;
-      line-height: 1;
-    }
-
-    .vtp-col-label {
-      font-size: 11px;
-      color: #334155;
-      text-align: center;
-      line-height: 1.2;
-      min-height: 28px;
-      max-width: 140px;
-    }
-
-    .vtp-unified-chart {
-      margin: 14px;
-      border: 1px solid #d9e6f1;
-      border-radius: 10px;
-      background-image: linear-gradient(to top, #e7eef6 1px, transparent 1px);
-      background-size: 100% 20%;
-      background-color: #f9fcff;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      overflow: hidden;
-    }
-
-    .vtp-section {
-      padding: 12px 10px 10px;
-      border-right: 1px solid #d9e6f1;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 8px;
-      min-height: 420px;
-    }
-
-    .vtp-section:last-child {
-      border-right: 0;
-    }
-
-    .vtp-section-title {
+    .hiv-kpi h4 {
       margin: 0;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: #15324a;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      color: #4f5c67;
+      font-weight: 700;
     }
 
-    .vtp-section-cols {
+    .hiv-kpi p {
+      margin: 6px 0 0;
+      font-size: 34px;
+      color: #0d1a23;
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    .hiv-kpi .hiv-share {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+
+    .hiv-filter-grid {
       display: grid;
-      align-items: end;
-      gap: 6px;
-      min-height: 360px;
-      position: relative;
-      isolation: isolate;
-      padding-top: 8px;
+      grid-template-columns: repeat(6, minmax(90px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    .vtp-section-cols.two {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0;
+    .hiv-filter {
+      display: grid;
+      gap: 3px;
     }
 
-    .vtp-section-cols.three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 4px;
-    }
-
-    .vtp-prop-svg {
-      position: absolute;
-      left: 4px;
-      right: 4px;
-      top: 10px;
-      bottom: 78px;
-      width: calc(100% - 8px);
-      height: calc(100% - 88px);
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .vtp-prop-line {
-      fill: none;
-      stroke: #d18211;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .vtp-prop-dot {
-      fill: #d18211;
-      stroke: #fff5e8;
-      stroke-width: 1.5;
-    }
-
-    .vtp-prop-label {
-      fill: #a76103;
+    .hiv-filter label {
       font-size: 8px;
-      font-weight: 700;
+      color: #4f5c67;
+      text-transform: capitalize;
     }
 
-    .vertical-bar {
-      display: grid;
-      gap: 10px;
-      align-items: end;
-      background: #ffffff;
+    .hiv-filter .select {
+      height: 20px;
+      font-size: 8px;
+      padding: 0 6px;
+      cursor: pointer;
+    }
+
+    .hiv-definition {
+      margin-top: 10px;
       border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 14px 10px 10px;
-      min-height: 260px;
+      background: #fafcfd;
+      padding: 8px;
+      font-size: 9px;
+      color: #364753;
     }
 
-    .vertical-bar-plot {
-      width: 100%;
-      min-height: 180px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 10px;
-      padding-bottom: 4px;
-      border-bottom: 1px solid #edf2f7;
-    }
-
-    .vertical-bar-fill {
-      width: 42px;
-      min-height: 8px;
-      border-radius: 6px 6px 0 0;
-      background: var(--teal);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      color: #ffffff;
-      font-size: 11px;
-      font-weight: 700;
-      padding-bottom: 6px;
-      box-shadow: inset 0 -2px 4px rgba(0,0,0,0.08);
-      transition: height 0.3s ease;
-    }
-
-    .vertical-bar-fill.amber {
-      background: var(--amber);
-    }
-
-    .vertical-bar-fill.red {
-      background: var(--red);
-    }
-
-    .vertical-bar-label {
-      text-align: center;
-      color: #334155;
-      font-size: 12px;
-      line-height: 1.3;
-      font-weight: 600;
-    }
-
-    .vertical-bar-meta {
+    .hiv-chart-grid {
+      margin-top: 10px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .vertical-bar-meta span {
-      text-align: center;
-    }
-
-    .fill.amber {
-      background: var(--amber);
-    }
-
-    .fill.red {
-      background: var(--red);
-    }
-
-    .vtp-long-chart {
-      padding: 12px;
-      background: #efefef;
-    }
-
-    .vtp-long-grid {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(86px, 1fr));
       gap: 10px;
-      align-items: end;
-      min-height: 360px;
-      padding: 14px 10px 10px;
+    }
+
+    .hiv-chart {
       border: 1px solid var(--line);
-      background: #f4f4f4;
+      background: #fff;
+      padding: 8px;
+      min-height: 220px;
     }
 
-    .vtp-long-item {
-      display: grid;
-      justify-items: center;
-      align-content: end;
-      gap: 6px;
-      min-height: 320px;
-    }
-
-    .vtp-long-value {
-      font-size: 10px;
-      color: #1f2937;
-      line-height: 1;
-      font-weight: 600;
-    }
-
-    .vtp-long-bar-wrap {
-      width: 52px;
-      height: 250px;
-      background: #d7dee3;
-      border: 1px solid #c5ced6;
-      display: flex;
-      align-items: flex-end;
-    }
-
-    .vtp-long-bar {
-      width: 100%;
-      min-height: 8px;
-      background: var(--teal);
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 700;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 4px;
-    }
-
-    .vtp-long-bar.amber {
-      background: var(--amber);
-    }
-
-    .vtp-long-bar.red {
-      background: var(--red);
-    }
-
-    .vtp-long-label {
-      font-size: 10px;
-      line-height: 1.2;
-      color: #111827;
+    .hiv-chart h4 {
+      margin: 0;
       text-align: center;
-      min-height: 40px;
+      font-size: 9px;
+      text-transform: uppercase;
+      color: #35424c;
     }
 
-    .matrix {
-      padding: 14px;
+    .pie-wrap {
+      margin-top: 10px;
       display: grid;
-      gap: 10px;
-    }
-
-    .matrix-row {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 70px;
+      place-items: center;
       gap: 8px;
+    }
+
+    .pie-mock {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: conic-gradient(#ff3d8d 0 65.5%, #161059 65.5% 100%);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px #d8dee3;
+    }
+
+    .pie-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 9px;
+      color: #3d4e5a;
+    }
+
+    .pie-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .pyramid-wrap {
+      margin-top: 10px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .age-row {
+      display: grid;
+      grid-template-columns: 52px 1fr 1fr;
+      gap: 6px;
       align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid #edf2f7;
     }
 
-    .matrix-row:last-child {
-      border-bottom: none;
-    }
-
-    .matrix-row span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .matrix-row strong {
-      font-size: 14px;
+    .age-row span {
+      font-size: 8px;
+      color: #5a6a75;
       text-align: right;
     }
 
-    .cascade-chart {
-      padding: 18px 14px 16px;
-      display: grid;
-      gap: 14px;
+    .age-bar {
+      height: 11px;
+      border-radius: 1px;
     }
 
-    .cascade-step {
-      display: grid;
-      gap: 6px;
+    .age-bar.male {
+      margin-left: auto;
+      background: #161059;
     }
 
-    .cascade-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: #334155;
-      line-height: 1.2;
+    .age-bar.female {
+      background: #ff3d8d;
     }
 
-    .cascade-bar {
-      height: 18px;
-      border-radius: 999px;
-      background: var(--teal);
-      min-width: 8px;
+    .hiv-placeholder {
+      font-size: 10px;
+      color: #495863;
+      padding: 10px;
+      border: 1px dashed var(--line);
+      background: #fcfcfc;
+      margin-top: 8px;
     }
 
-    .cascade-bar.amber {
-      background: var(--amber);
-    }
-
-    .cascade-bar.red {
-      background: var(--red);
-    }
-
-    .cascade-bar.risk {
-      background: var(--red-soft);
-      position: relative;
-    }
-
-    .cascade-bar.risk::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(243, 178, 65, 0.18), rgba(243, 178, 65, 0));
-    }
-
-    .footnote {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
-      padding: 12px 14px;
-      border-top: 1px solid var(--line);
-      background: #ffffff;
-    }
-
-    .placeholder-panel {
-      border: 1px solid var(--line);
-      background: #ffffff;
+    .chart-host {
+      margin-top: 8px;
+      width: 100%;
       min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #4b5563;
-      font-size: 14px;
-      padding: 30px;
     }
 
-    .tile-section {
-      margin-bottom: 12px;
+    .chart-host.tall {
+      min-height: 320px;
     }
 
-    .tile-section-title {
-      margin: 0 0 8px;
-      padding: 8px 12px;
+    .facility-table-wrap {
+      margin-top: 8px;
       border: 1px solid var(--line);
-      background: #e6e6e6;
-      font-size: 12px;
-      font-weight: 700;
-      border-radius: 2px;
-      color: #111827;
+      background: #fff;
+      overflow: auto;
+    }
+
+    .facility-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+      min-width: 700px;
+    }
+
+    .facility-table th,
+    .facility-table td {
+      border: 1px solid #d9e0e6;
+      padding: 6px;
+      text-align: left;
+    }
+
+    .facility-table th {
+      background: #eef3f7;
       text-transform: uppercase;
-      letter-spacing: 0;
-      font-family: Nunito, sans-serif;
+      font-size: 8px;
+      letter-spacing: 0.2px;
     }
 
-    @media (max-width: 1180px) {
+    .hiv-extra-charts {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .hiv-wide-chart {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 8px;
+      min-height: 180px;
+    }
+
+    .hiv-wide-chart h4 {
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 9px;
+      color: #35424c;
+      text-align: center;
+    }
+
+    .chart-caption {
+      margin-top: 6px;
+      font-size: 9px;
+      color: #5a6a75;
+      text-align: center;
+    }
+
+    .line-mock {
+      margin-top: 10px;
+      height: 120px;
+      background:
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px) 0 0 / 8.3% 100%,
+        linear-gradient(to top, rgba(0, 0, 0, 0.04) 1px, transparent 1px) 0 0 / 100% 25%,
+        linear-gradient(135deg, #00b9ab 0%, #00b9ab 35%, transparent 36%),
+        linear-gradient(160deg, transparent 0 30%, #ff3d8d 31% 33%, transparent 34% 100%);
+      border: 1px solid #e1e7eb;
+    }
+
+    .stack-mock {
+      margin-top: 10px;
+      height: 120px;
+      display: grid;
+      grid-template-rows: repeat(8, 1fr);
+      gap: 4px;
+    }
+
+    .stack-row {
+      display: grid;
+      grid-template-columns: 18% 24% 18% 40%;
+      height: 100%;
+      border: 1px solid #e5eaee;
+      overflow: hidden;
+    }
+
+    .stack-row i {
+      display: block;
+      height: 100%;
+    }
+
+    .stack-row i:nth-child(1) {
+      background: #00b9ab;
+    }
+
+    .stack-row i:nth-child(2) {
+      background: #1f9cf0;
+    }
+
+    .stack-row i:nth-child(3) {
+      background: #f39c12;
+    }
+
+    .stack-row i:nth-child(4) {
+      background: #ff3d8d;
+    }
+
+    .bar-mock {
+      margin-top: 10px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .bar-mock div {
+      height: 12px;
+      background: linear-gradient(to right, #00b9ab, #00d2b7);
+      border: 1px solid #d8e6e4;
+    }
+
+    .hiv-note {
+      margin-top: 10px;
+      font-size: 10px;
+      color: #4f5c67;
+    }
+
+    .top-nav a:focus-visible,
+    .hiv-tab:focus-visible,
+    .back-to-top:focus-visible,
+    .skip-link:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 8px;
+      top: -36px;
+      background: #0b2231;
+      color: #fff;
+      padding: 7px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      border: 0;
+      background: #0f364b;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 60;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (max-width: 1080px) {
       .filters {
         grid-template-columns: repeat(3, 1fr);
       }
 
+      .filters-bottom {
+        width: 32%;
+      }
+
       .kpis {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .dashboard-grid {
+      .bottom-grid {
         grid-template-columns: 1fr;
       }
 
-      .vtp-long-grid {
-        grid-template-columns: repeat(3, minmax(86px, 1fr));
+      .panel-text,
+      .map-panel {
+        min-height: 240px;
       }
     }
 
-    @media (max-width: 760px) {
-      .topbar {
-        height: auto;
-        padding: 8px 12px;
-        align-items: flex-start;
-        gap: 10px;
-      }
-
-      .tabs {
-        min-height: auto;
-        gap: 0;
-      }
-
-      .breadcrumb-bar {
-        overflow-x: auto;
-      }
-
-      .tab.alert {
-        margin-left: 0;
-      }
-
-      .hivt-chart-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page {
-        padding: 16px 12px 26px;
-        border-left: 0;
-        border-right: 0;
-      }
-
-      .title-row {
-        display: block;
-      }
-
-      .actions {
-        justify-content: flex-start;
-        margin-top: 12px;
-      }
-
-      .filters,
-      .kpis,
-      .mini-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .vtp-long-grid {
-        grid-template-columns: repeat(2, minmax(86px, 1fr));
-      }
-
-      .indicator-table {
-        min-width: 720px;
-      }
-
-      .table-scroll {
-        overflow-x: auto;
-      }
-
-      .suppression-pie-wrap {
-        grid-template-columns: 1fr;
-      }
-
-      .suppression-pie {
-        width: 190px;
-        height: 190px;
-      }
-
-      .suppression-pie::before {
-        inset: 28px;
-      }
-    }
-
-    @media print {
-      @page {
-        size: A3 landscape;
-        margin: 5mm;
-      }
-
-      body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        font-size: 7px;
-      }
-
-      .topbar,
-      .subtabs {
-        display: none;
-      }
-
-      .page {
-        padding: 0;
-        border-left: 0;
-        border-right: 0;
-      }
-
-      .tab-panel {
-        display: block;
-        break-before: page;
-      }
-
-      .tab-panel:first-of-type,
-      .tab-panel.active {
-        break-before: auto;
-      }
-
-      .title-row {
-        margin-bottom: 4px;
-        border-top-width: 4px;
-        padding-top: 3px;
-      }
-
-      .title-row h2 {
-        min-height: 22px;
-        padding-left: 18px;
-        font-size: 10px;
-      }
-
+    @media (max-width: 640px) {
       .filters {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 4px;
-        margin-bottom: 4px;
-        break-inside: avoid;
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .field label {
-        margin-bottom: 2px;
-        font-size: 7px;
-      }
-
-      .field select,
-      .field input {
-        height: 16px;
-        font-size: 7px;
-        padding: 0 4px;
-      }
-
-      .definition {
-        margin: 3px 0 4px;
-      }
-
-      .definition h3,
-      .tile-section-title,
-      .panel-header {
-        padding: 3px 5px;
-        min-height: 16px;
-        font-size: 7px;
-      }
-
-      .definition ul {
-        padding: 4px 14px;
-        font-size: 7px;
-      }
-
-      .definition ul ul {
-        margin-top: 0;
-        padding-left: 12px;
-      }
-
-      .tile-section {
-        margin-bottom: 3px;
-        break-inside: avoid;
-      }
-
-      .section-gap {
-        margin-top: 3px;
+      .filters-bottom {
+        width: 48%;
       }
 
       .kpis {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 3px;
-        margin-bottom: 3px;
+        grid-template-columns: 1fr;
       }
 
-      .kpi {
-        min-height: 38px;
-        break-inside: avoid;
+      .kpi-value,
+      .mini strong {
+        font-size: 36px;
       }
 
-      .kpi small {
-        min-height: 14px;
-        padding: 2px;
-        font-size: 6px;
+      .kpi-percent {
+        margin-right: 10px;
       }
 
-      .kpi strong {
-        margin-top: 3px;
-        font-size: 14px;
+      .hiv-kpis {
+        grid-template-columns: 1fr;
       }
 
-      .kpi .delta {
-        margin-left: 2px;
-        font-size: 6px;
+      .hiv-kpi p {
+        font-size: 28px;
       }
 
-      .panel {
-        break-inside: avoid;
+      .hiv-filter-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .panel-header h3,
-      .panel-header span {
-        font-size: 7px;
-      }
-
-      .indicator-table th,
-      .indicator-table td {
-        padding: 2px 4px;
-        font-size: 6.5px;
-      }
-
-      .tag {
-        min-width: 42px;
-        padding: 2px 4px;
-        font-size: 7px;
-      }
-
-      .suppression-pie-wrap {
-        grid-template-columns: 150px 1fr;
-        gap: 8px;
-        padding: 6px;
-      }
-
-      .suppression-pie {
-        width: 140px;
-        height: 140px;
-      }
-
-      .suppression-pie::before {
-        inset: 22px;
-      }
-
-      .suppression-pie-center strong {
-        font-size: 16px;
-      }
-
-      .suppression-pie-center small {
-        margin-top: 3px;
-        font-size: 6px;
-      }
-
-      .suppression-legend-item {
-        grid-template-columns: 8px 1fr auto;
-        padding: 3px 5px;
-        gap: 5px;
-      }
-
-      .suppression-legend-item strong,
-      .suppression-legend-item small {
-        font-size: 7px;
-      }
-
-      .suppression-swatch {
-        width: 7px;
-        height: 7px;
+      .hiv-chart-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="mark">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Coat_of_arms_of_Kenya_(Official).svg?width=80" alt="Integrated Data Warehouse">
-      </div>
-      <div>
-        <h1>Integrated</h1>
-        <span>Data Warehouse</span>
-      </div>
-    </div>
-    <nav class="tabs" aria-label="Primary">
-      <a class="tab active" href="#top">Home</a>
-      <a class="tab" href="#reporting-rates">Reporting Rates</a>
-      <a class="tab" href="#hiv-testing-prevention">HIV Testing &amp; Prevention</a>
-      <a class="tab" href="#service-desk">Service Desk</a>
-      <a class="tab" href="#resources">Resources</a>
-      <a class="tab" href="#case-surveillance-dashboard">Case Surveillance Dashboard</a>
-      <a class="tab alert" href="#clear-cache">Clear Cached Data</a>
-    </nav>
-    <div class="user-tools">
-      <span class="profile-dot" aria-label="User profile"></span>
-    </div>
+  <a class="skip-link" href="#hiv-treatment">Skip to HIV Treatment</a>
+  <header class="top-nav">
+    <div class="brand">Integrated<br/>Data Warehouse</div>
+    <a href="#home">Home</a>
+    <a href="#reporting-rates">Reporting Rates</a>
+    <a href="#hiv-testing-prevention">HIV Testing &amp; Prevention</a>
+    <a href="#hiv-treatment/newly-started">HIV Treatment</a>
+    <a href="#vtp">VTP</a>
+    <a href="#service-desk">Service Desk</a>
   </header>
-  <div class="breadcrumb-bar" aria-label="Breadcrumb">
-    <p class="crumbs">Home / HIV Testing &amp; Prevention / HIV Testing &amp; Prevention</p>
-  </div>
 
-  <main class="page" id="top">
-    <nav class="subtabs" aria-label="VTP sections">
-      <a class="subtab active" href="#triple-elimination" data-tab="triple-elimination">Triple Testing</a>
-      <a class="subtab" href="#early-infant-diagnosis" data-tab="early-infant-diagnosis">Early Infant Diagnosis</a>
-      <a class="subtab" href="#viral-load-data" data-tab="viral-load-data">Viral Load</a>
-      <a class="subtab" href="#prep" data-tab="prep">PrEP</a>
-    </nav>
-
-    <section class="filters" aria-label="Filters">
-      <div class="field">
-        <label for="period">Reporting Period</label>
-        <select id="period">
-          <option>Period</option>
-          <option>April 2026</option>
-          <option>March 2026</option>
-          <option>February 2026</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="county">County</label>
-        <select id="county">
-          <option>All Counties</option>
-          <option>Nairobi</option>
-          <option>Kisumu</option>
-          <option>Mombasa</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="subcounty">Sub County</label>
-        <select id="subcounty">
-          <option>All Sub Counties</option>
-          <option>Westlands</option>
-          <option>Embakasi East</option>
-          <option>Kasarani</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="facility">Facility</label>
-        <input id="facility" type="text" value="" placeholder="Search facility">
-      </div>
-      <div class="field">
-        <label for="age-group">Age group</label>
-        <select id="age-group">
-          <option>All Age Groups</option>
-          <option>0-4</option>
-          <option>5-9</option>
-          <option>10-14</option>
-          <option>15-19</option>
-          <option>20-24</option>
-          <option>25-34</option>
-          <option>35-49</option>
-          <option>50+</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="pb-status">Pregnant/Breastfeeding Status</label>
-        <select id="pb-status">
-          <option value="">All Statuses</option>
-          <option value="pregnant">Pregnant</option>
-          <option value="breastfeeding">Breastfeeding</option>
-          <option value="pregnant-breastfeeding">Pregnant and Breastfeeding</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="cohort-year">Cohort</label>
-        <select id="cohort-year">
-          <option value="">Select year</option>
-          <option value="2026">2026</option>
-          <option value="2025">2025</option>
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
-        </select>
-        <select id="cohort-month" style="display:none; margin-top:10px;">
-          <option value="">Select month</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="partner">Partner</label>
-        <select id="partner">
-          <option>Select Partner</option>
-          <option>Aids Healthcare Foundation Kenya</option>
-          <option>CHAK CHAP STAWISHA</option>
-          <option>CHS Shinda Tena</option>
-          <option>CIHEB CONNECT</option>
-          <option>CIHEB Entrench</option>
-          <option>CIHEB PACT IMARA</option>
-        </select>
-      </div>
-      <button class="button primary apply">Apply</button>
+  <main id="home" class="container">
+    <section class="mode-bar">
+      <span>HOME</span>
+      <span class="split">HMIS STATISTICS</span>
     </section>
 
-    <div class="tab-panel active" id="triple-elimination">
-      <section class="title-row">
-        <div>
-          <h2>TRIPLE TESTING</h2>
-          <p>Vertical Transmission Program and Triple Testing monitoring for HIV, syphilis, and hepatitis B across ANC, maternity, PNC, maternal treatment, infant prophylaxis, EID, and viral load outcomes.</p>
+    <section class="filters">
+      <div class="filter">
+        <label>County</label>
+        <div class="select">Select County</div>
+      </div>
+      <div class="filter">
+        <label>Sub-County</label>
+        <div class="select">Select Sub-County</div>
+      </div>
+      <div class="filter">
+        <label>Facility</label>
+        <div class="select">Select Facility</div>
+      </div>
+      <div class="filter">
+        <label>Partner</label>
+        <div class="select">Select Partner</div>
+      </div>
+      <div class="filter">
+        <label>Agency</label>
+        <div class="select">Select Agency</div>
+      </div>
+      <div class="filter">
+        <label>Sex</label>
+        <div class="select">Select Sex</div>
+      </div>
+    </section>
+
+    <section class="filters-bottom">
+      <div class="filter">
+        <label>Age Group</label>
+        <div class="select">Select Age Group</div>
+      </div>
+    </section>
+
+    <section class="kpis">
+      <article class="card">
+        <h2 class="kpi-title">Current On ART as at May 2026</h2>
+        <p class="kpi-value">1,139,605</p>
+      </article>
+      <article class="card">
+        <h2 class="kpi-title">Eligible for VL</h2>
+        <p class="kpi-percent">99%</p>
+        <p class="kpi-value">1,127,762</p>
+      </article>
+      <article class="card">
+        <h2 class="kpi-title">Valid Viral Load</h2>
+        <p class="kpi-percent">76%</p>
+        <p class="kpi-value">861,315</p>
+      </article>
+      <article class="card">
+        <h2 class="kpi-title">Virally Suppressed</h2>
+        <p class="kpi-percent">96%</p>
+        <p class="kpi-value">824,099</p>
+      </article>
+    </section>
+
+    <section class="bottom-grid">
+      <section>
+        <article class="mini">
+          <h4>Adults on ART</h4>
+          <p>15+ Years</p>
+          <strong>1,111,657</strong>
+        </article>
+        <article class="mini">
+          <h4>Children on ART</h4>
+          <p>0-14 Years</p>
+          <strong>27,945</strong>
+        </article>
+        <article class="mini">
+          <h4>Adolescents on ART</h4>
+          <p>10-19 Years</p>
+          <strong>47,271</strong>
+        </article>
+      </section>
+
+      <section class="map-panel">
+        <div class="tabs">
+          <span>EMR Sites</span>
+          <span>Current On ART</span>
+          <span>Valid Viral Load</span>
+          <span>Viral Suppression</span>
         </div>
-        <div class="actions">
-          <button class="button">Export</button>
-          <button class="button">Share</button>
-          <button class="button primary">Refresh Data</button>
+        <div class="map-stage">
+          <div class="kenya-shape" aria-hidden="true"></div>
         </div>
       </section>
 
-      <section class="definition">
-        <h3>Definition of terms</h3>
+      <aside class="panel-text">
+        <h3>Welcome</h3>
+        <p>
+          Since the inception of the National Data Warehouse (NDWH), a cumulative total of
+          2695 health facilities across 45 counties in Kenya, supported by various service
+          delivery partners (SDPs), have uploaded care and treatment data to the platform.
+        </p>
+        <p>
+          As of May 2026, 1821 facilities submitted care and treatment datasets to the NDWH,
+          supported by 34 SDPs operating in 39 counties.
+        </p>
+
+        <h3>Key Highlights</h3>
         <ul>
-          <li>Triple Testing: HIV, syphilis, and hepatitis B screening within ANC workflows.</li>
-          <li>Positive outcomes: HIV, syphilis, and hepatitis B positive results among clients screened.</li>
-          <li>VTP treatment: Maternal and infant treatment and prophylaxis outcomes after positive diagnosis.</li>
-          <li>Infant Prophylaxis: Coverage of low-risk and high-risk infant prophylaxis interventions, including hepatitis B vaccination and immunoglobulin.</li>
+          <li>Trends in identification of new positives cumulatively and by month.</li>
+          <li>Male and female identification trends by month.</li>
+          <li>Overall MMD uptake based on last month patients current on ART.</li>
         </ul>
-      </section>
 
-      <section class="tile-section" aria-label="Triple testing tiles">
-        <h3 class="tile-section-title">Triple Testing</h3>
-        <div class="kpis">
-          <article class="kpi">
-            <small>1st ANC</small>
-            <strong>148,920</strong>
-          </article>
-          <article class="kpi">
-            <small>KNOWN POSITIVES</small>
-            <strong>7,895</strong>
-          </article>
-          <article class="kpi">
-            <small>Tested for HIV at 1st ANC</small>
-            <strong>133,444</strong>
-          </article>
-          <article class="kpi">
-            <small>Tested for Syphilis at ANC</small>
-            <strong>134,548</strong>
-          </article>
-          <article class="kpi">
-            <small>Tested for Hepatitis B at ANC</small>
-            <strong>119,224</strong>
-          </article>
-        </div>
-      </section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>Triple Testing</h3>
-          <span>ANC</span>
-        </div>
-        <div class="bars">
-          <div class="bar-row">
-            <div class="bar-label"><span>1st ANC</span></div>
-            <div class="track"><div class="fill" style="width: 94.2%;"></div></div>
-            <div style="display:flex; justify-content:space-between; color: var(--muted); font-size: 11px; gap: 8px;"><span>148,920</span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Tested for HIV at 1st ANC</span><strong>95.3%</strong></div>
-            <div class="track"><div class="fill amber" style="width: 95.3%;"></div></div>
-            <div style="display:flex; justify-content:space-between; color: var(--muted); font-size: 11px; gap: 8px;"><span>133,444/140,025</span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Tested for syphilis at ANC</span><strong>90.3%</strong></div>
-            <div class="track"><div class="fill amber" style="width: 90.3%;"></div></div>
-            <div style="display:flex; justify-content:space-between; color: var(--muted); font-size: 11px; gap: 8px;"><span>134,548/148,920</span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Tested for hepatitis B at ANC</span><strong>80.1%</strong></div>
-            <div class="track"><div class="fill red" style="width: 80.1%;"></div></div>
-            <div style="display:flex; justify-content:space-between; color: var(--muted); font-size: 11px; gap: 8px;"><span>119,224/148,920</span></div>
-          </div>
-        </div>
-      </section>
-      <section class="tile-section" aria-label="Triple Testing positive result tiles">
-        <h3 class="tile-section-title">Positive outcomes</h3>
-        <div class="kpis">
-          <article class="kpi">
-            <small>Total Positives for HIV</small>
-            <strong>8,968</strong>
-          </article>
-          <article class="kpi">
-            <small>HIV Positive at 1st ANC</small>
-            <strong>3,250</strong>
-          </article>
-          <article class="kpi">
-            <small>HIV Positive after retests</small>
-            <strong>2,150</strong>
-          </article>
-          <article class="kpi">
-            <small>HIV Positive in Maternity</small>
-            <strong>1,850</strong>
-          </article>
-          <article class="kpi">
-            <small>HIV Positive in PNC</small>
-            <strong>1,718</strong>
-          </article>
-          <article class="kpi">
-            <small>Positive Syphilis</small>
-            <strong>2,418</strong>
-          </article>
-          <article class="kpi">
-            <small>Positive Hepatitis B</small>
-            <strong>1,734</strong>
-          </article>
-        </div>
-      </section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>Positive outcomes</h3>
-          <span>Positive results</span>
-        </div>
-        <div class="bars">
-          <div class="bar-row">
-            <div class="bar-label"><span>Proportion of Total positives for HIV (Known + New)</span><strong>6.0%</strong></div>
-            <div class="track"><div class="fill red" style="width: 6.0%;"></div></div>
-            <div style="display:flex; justify-content:space-between; color: var(--muted); font-size: 11px; gap: 8px;"><span>8,968/148,920</span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Proportion of Positive syphilis result</span><strong>1.8%</strong></div>
-            <div class="track"><div class="fill red" style="width: 1.8%;"></div></div>
-            <div style="display:flex; justify-content:space-between; color: var(--muted); font-size: 11px; gap: 8px;"><span>2,418/134,548</span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Proportion of Positive hepatitis B result</span><strong>1.5%</strong></div>
-            <div class="track"><div class="fill red" style="width: 1.5%;"></div></div>
-            <div style="display:flex; justify-content:space-between; color: var(--muted); font-size: 11px; gap: 8px;"><span>1,734/119,224</span></div>
-          </div>
-        </div>
-      </section>
-      <section class="tile-section" aria-label="VTP treatment tiles">
-        <h3 class="tile-section-title">VTP treatment</h3>
-        <div class="kpis">
-          <article class="kpi">
-            <small>On HAART at 1st ANC</small>
-            <strong>6,936</strong>
-          </article>
-          <article class="kpi">
-            <small>Starting HAART at ANC</small>
-            <strong>948</strong>
-          </article>
-          <article class="kpi">
-            <small>Starting HAART at Maternity</small>
-            <strong>412</strong>
-          </article>
-          <article class="kpi">
-            <small>Initiating HAART at PNC</small>
-            <strong>236</strong>
-          </article>
-          <article class="kpi">
-            <small>Maternal Syphilis Treatment</small>
-            <strong>2,076</strong>
-          </article>
-          <article class="kpi">
-            <small>Congenital Syphilis Treatment</small>
-            <strong>326</strong>
-          </article>
-          <article class="kpi">
-            <small>Maternal Hepatitis B Prophylaxis</small>
-            <strong>1,284</strong>
-          </article>
-          <article class="kpi">
-            <small>Maternal Hepatitis B Treatment</small>
-            <strong>918</strong>
-          </article>
-          <article class="kpi">
-            <small>Maternal Hep B Vaccine</small>
-            <strong>1,102</strong>
-          </article>
-        </div>
-      </section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>VTP treatment chart</h3>
-          <span>HIV, Syphilis and Hepatitis B</span>
-        </div>
-        <div class="vtp-unified-chart" role="img" aria-label="VTP treatment chart with three sections: HIV, Syphilis, and Hepatitis B, each shown as separate vertical bars.">
-          <div class="vtp-section">
-            <h4 class="vtp-section-title">HIV</h4>
-            <div class="vtp-section-cols two">
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar navy" style="height: 100%;">8,968</div></div>
-                <div class="vtp-col-value">8,968</div>
-                <div class="vtp-col-label">Positive for HIV</div>
-              </div>
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar blue" style="height: 87.9%;">87.9%</div></div>
-                <div class="vtp-col-value">7,884/8,968</div>
-                <div class="vtp-col-label">On HAART at 1st ANC + Starting HAART</div>
-              </div>
-            </div>
+        <h3>EMR Sites in Kenya</h3>
+        <p><strong>Kenya EMR</strong></p>
+        <p>Use the map to zero in to certain counties to understand program reporting.</p>
+      </aside>
+    </section>
+
+    <section class="content-sections">
+      <article id="hiv-treatment" class="section-card">
+        <h3>HIV Treatment</h3>
+        <div class="hiv-panel">
+          <div class="hiv-subtabs" role="tablist" aria-label="HIV Treatment Tabs">
+            <button id="tab-newly-started" class="hiv-tab active" data-target="view-newly-started" data-slug="newly-started" role="tab" aria-controls="view-newly-started" aria-selected="true">Newly Started On ART</button>
+            <button id="tab-tpt" class="hiv-tab" data-target="view-tpt" data-slug="tpt" role="tab" aria-controls="view-tpt" aria-selected="false">TPT</button>
+            <button id="tab-current-on-art" class="hiv-tab" data-target="view-current-on-art" data-slug="current-on-art" role="tab" aria-controls="view-current-on-art" aria-selected="false">Current On ART</button>
+            <button id="tab-art-optimization" class="hiv-tab" data-target="view-art-optimization" data-slug="art-optimization" role="tab" aria-controls="view-art-optimization" aria-selected="false">ART Regimen</button>
+            <button id="tab-adverse-events" class="hiv-tab" data-target="view-adverse-events" data-slug="adverse-events" role="tab" aria-controls="view-adverse-events" aria-selected="false">Adverse Drug Reactions Reported</button>
+            <button id="tab-dsd" class="hiv-tab" data-target="view-dsd" data-slug="dsd" role="tab" aria-controls="view-dsd" aria-selected="false">DSD</button>
+            <button id="tab-vl-monitoring" class="hiv-tab" data-target="view-vl-monitoring" data-slug="vl-monitoring" role="tab" aria-controls="view-vl-monitoring" aria-selected="false">VL Monitoring</button>
+            <button id="tab-treatment-outcomes" class="hiv-tab" data-target="view-treatment-outcomes" data-slug="treatment-outcomes" role="tab" aria-controls="view-treatment-outcomes" aria-selected="false">TREATMENT OUTCOMES by Cohort</button>
+            <button id="tab-ahd" class="hiv-tab" data-target="view-ahd" data-slug="ahd" role="tab" aria-controls="view-ahd" aria-selected="false">AHD</button>
+            <button id="tab-ncd" class="hiv-tab" data-target="view-ncd" data-slug="ncd" role="tab" aria-controls="view-ncd" aria-selected="false">NCD</button>
           </div>
 
-          <div class="vtp-section">
-            <h4 class="vtp-section-title">Syphilis</h4>
-            <div class="vtp-section-cols three">
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar navy" style="height: 100%;">2,418</div></div>
-                <div class="vtp-col-value">2,418</div>
-                <div class="vtp-col-label">Positive syphilis</div>
-              </div>
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar blue" style="height: 85.9%;">85.9%</div></div>
-                <div class="vtp-col-value">2,076/2,418</div>
-                <div class="vtp-col-label">Maternal syphilis treatment</div>
-              </div>
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar orange" style="height: 13.5%;">13.5%</div></div>
-                <div class="vtp-col-value">326/2,418</div>
-                <div class="vtp-col-label">Congenital syphilis treatment</div>
-              </div>
+          <section id="view-newly-started" class="hiv-view active" role="tabpanel" aria-labelledby="tab-newly-started">
+            <div class="hiv-banner">Newly Started On ART</div>
+            <div class="hiv-filter-grid">
+              <div class="hiv-filter"><label>County</label><div class="select">Select County</div></div>
+              <div class="hiv-filter"><label>Sub-County</label><div class="select">Select Sub-County</div></div>
+              <div class="hiv-filter"><label>Facility</label><div class="select">Select Facility</div></div>
+              <div class="hiv-filter"><label>Partner</label><div class="select">Select Partner</div></div>
+              <div class="hiv-filter"><label>Agency</label><div class="select">Select Agency</div></div>
+              <div class="hiv-filter"><label>Period</label><div class="select">Period</div></div>
             </div>
-          </div>
 
-          <div class="vtp-section">
-            <h4 class="vtp-section-title">Hepatitis B</h4>
-            <div class="vtp-section-cols three">
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar navy" style="height: 100%;">1,734</div></div>
-                <div class="vtp-col-value">1,734</div>
-                <div class="vtp-col-label">Positive hepatitis B</div>
-              </div>
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar blue" style="height: 74.0%;">74.0%</div></div>
-                <div class="vtp-col-value">1,284/1,734</div>
-                <div class="vtp-col-label">Maternal hepatitis B prophylaxis</div>
-              </div>
-              <div class="vtp-col">
-                <div class="vtp-col-plot"><div class="vtp-col-bar orange" style="height: 52.9%;">52.9%</div></div>
-                <div class="vtp-col-value">918/1,734</div>
-                <div class="vtp-col-label">Maternal hepatitis B treatment</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="tile-section" aria-label="Infant Prophylaxis tiles">
-        <h3 class="tile-section-title">Infant Prophylaxis</h3>
-        <div class="kpis">
-          <article class="kpi">
-            <small>Low Risk Infants</small>
-            <strong>4,118</strong>
-          </article>
-          <article class="kpi">
-            <small>High Risk Infants</small>
-            <strong>1,962</strong>
-          </article>
-          <article class="kpi">
-            <small>Hepatitis B Vaccination</small>
-            <strong>3,876</strong>
-          </article>
-          <article class="kpi">
-            <small>Hep B Immunoglobulin</small>
-            <strong>1,544</strong>
-          </article>
-        </div>
-      </section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>Infant Prophylaxis</h3>
-          <span>Given at ANC</span>
-        </div>
-        <div class="table-scroll">
-          <table class="indicator-table">
-            <thead>
-              <tr><th>Indicator</th><th>Numerator</th><th>Denominator</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Low risk infants given prophylaxis</td><td>4,118</td><td>4,300</td><td><span class="tag good">95.8%</span></td></tr>
-              <tr><td>High risk infants given prophylaxis</td><td>1,962</td><td>2,240</td><td><span class="tag watch">87.6%</span></td></tr>
-              <tr><td>Hepatitis B Vaccination given</td><td>3,876</td><td>4,300</td><td><span class="tag good">90.1%</span></td></tr>
-              <tr><td>Hep B Immunoglobulin given</td><td>1,544</td><td>2,240</td><td><span class="tag watch">68.9%</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="panel section-gap" aria-label="Triple testing glossary">
-        <div class="panel-header">
-          <h3>Glossary</h3>
-        </div>
-        <div class="table-scroll">
-          <table class="indicator-table glossary-table">
-            <thead>
-              <tr>
-                <th>Indicator</th>
-                <th>Description</th>
-                <th>Numerator</th>
-                <th>Denominator</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tested for HIV at 1st ANC</td>
-                <td>The number of pregnant women tested for HIV and received results as per the HTS guidelines.</td>
-                <td>Total number of pregnant women tested for HIV and received results at 1st ANC</td>
-                <td>Total number of pregnant women eligible for HIV testing at 1st ANC (Excluding KPs at 1st ANC)</td>
-              </tr>
-              <tr>
-                <td>Tested for syphilis at 1st ANC</td>
-                <td>Number of pregnant women who screened for syphilis.</td>
-                <td>Total number of pregnant women who screened for Syphillis at 1st ANC</td>
-                <td>Total number of pregnant women attending 1st ANC</td>
-              </tr>
-              <tr>
-                <td>Tested for hepatitis B at 1st ANC</td>
-                <td>Number of pregnant women attending ANC services who screened for hepatitis B</td>
-                <td>Total number of pregnant women who screened for hepatitis B at 1st ANC</td>
-                <td>Total number of pregnant women attending 1st ANC</td>
-              </tr>
-              <tr>
-                <td>Proportion of Total positives for HIV (Known + New)</td>
-                <td>Proportion of HIV positive pregnant women at 1st ANC</td>
-                <td>Total number of HIV positive pregnant women (KP and NP)</td>
-                <td>Total number of pregnant women with Known HIV status</td>
-              </tr>
-              <tr>
-                <td>Proportion of Positive syphilis result</td>
-                <td>Proportion of pregnant women who screened positive for syphillis at 1st ANC</td>
-                <td>total number of pregnant women screened positive for syphilis at 1st ANC</td>
-                <td>Total number of pregnant women screened for syphilis at 1st ANC</td>
-              </tr>
-              <tr>
-                <td>Proportion of Positive hepatitis B result</td>
-                <td>Proportion of pregnant women who screened positive for hepatitis B at 1st ANC</td>
-                <td>total number of pregnant women screened positive for hepatitis B at 1st ANC</td>
-                <td>Total number of pregnant women screened for hepatitis B at 1st ANC</td>
-              </tr>
-              <tr>
-                <td>On HAART at 1st ANC</td>
-                <td>Pregnant women with HIV who were already on HAART at 1st ANC visit.</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Started HAART at ANC</td>
-                <td>Pregnant women with HIV who were initiated on HAART during ANC.</td>
-                <td>Total number of HIV positive pregnant women initiated on HAART during ANC</td>
-                <td>Total number of HIV positive pregnant women eligible for HAART initiation during ANC</td>
-              </tr>
-              <tr>
-                <td>Maternal syphilis treatment</td>
-                <td>Pregnant women diagnosed with syphilis who received maternal syphilis treatment.</td>
-                <td>Total number of pregnant women with positive syphilis result who received maternal treatment</td>
-                <td>Total number of pregnant women with confirmed positive syphilis result</td>
-              </tr>
-              <tr>
-                <td>Congenital syphilis treatment</td>
-                <td>Infants diagnosed with congenital syphilis who received treatment.</td>
-                <td>Total number of infants with congenital syphilis who received treatment</td>
-                <td>Total number of infants exposed with congenital syphilis</td>
-              </tr>
-              <tr>
-                <td>Maternal hepatitis B prophylaxis</td>
-                <td>Pregnant women with positive hepatitis B result who received prophylaxis.</td>
-                <td>Total number of pregnant women with positive hepatitis B result who received prophylaxis</td>
-                <td>Total number of pregnant women with positive HBSAg</td>
-              </tr>
-              <tr>
-                <td>Maternal hepatitis B treatment</td>
-                <td>Pregnant women with positive hepatitis B result who received treatment.</td>
-                <td>Total number of pregnant women with positive hepatitis B result who received treatment</td>
-                <td>Total number of pregnant women eligible for maternal hepatitis B treatment</td>
-              </tr>
-              <tr>
-                <td>Low Risk Infants</td>
-                <td>Total number of infants born to low risk mothers</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>High Risk Infants</td>
-                <td>Total number of infants born to high risk mothers</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Hepatitis B Vaccination</td>
-                <td>Infants who received hepatitis B birth-dose vaccination as part of prophylaxis.</td>
-                <td>Total infants who received hepatitis B vaccine</td>
-                <td>Total infants eligible for hepatitis B vaccine</td>
-              </tr>
-              <tr>
-                <td>Hep B Immunoglobulin</td>
-                <td>High-risk infants who received immunoglobulin prophylaxis.</td>
-                <td>Total high-risk infants who received immunoglobulin</td>
-                <td>Total high-risk infants eligible for immunoglobulin</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+            <div class="hiv-definition">Indicator definition: Newly started on ART = Number of patients who were started on ART within the month of May 2026.</div>
 
-    <div class="tab-panel" id="early-infant-diagnosis">
-      <section class="title-row"><div><h2>EARLY INFANT DIAGNOSIS</h2></div></section>
-      <section class="definition"><h3>Definition of terms</h3><ul><li>Early Infant Diagnosis: Follow-up and HIV testing pathway for HIV-exposed infants (HEIs) from birth to final outcome at 18-24 months.</li><li>Total HEIs: Total number of HIV-exposed infants enrolled in care.</li><li>Total Paired HEIs: Number of HEIs with linked mother-baby records.</li><li>Pairing Gap: Number of HEIs not yet linked to maternal records.</li><li>Pairing Uptake: Proportion of HEIs that are successfully paired to maternal records.</li><li>EID Testing Cascade: Sequential infant HIV tests by age point (0-2 weeks, 6-8 weeks, 6 months, 12 months, 18-24 months).</li><li>Final Outcomes: Documented infant outcomes at end of follow-up (Negative, Positive, Died, LTFU, Undocumented).</li><li>Infant prophylaxis: Number of HIV-exposed infants started on infant prophylaxis.</li></ul></section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>Pairing Uptake</h3>
-        </div>
-        <div class="panel-body">
-          <p>Mother-baby pairing tracks linked maternal and infant records through the Early Infant Diagnosis cascade, ensuring HEI<span style="font-size: 0.7em;">s</span> are followed from delivery through final outcome.</p>
-          <div class="kpis" style="margin-top: 1rem; display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
-            <article class="kpi">
-              <small>Total HEI<span style="font-size: 0.7em;">s</span></small>
-              <strong>7,104</strong>
-            </article>
-            <article class="kpi">
-              <small>Total Paired HEI<span style="font-size: 0.7em;">s</span></small>
-              <strong>4,476</strong>
-            </article>
-            <article class="kpi">
-              <small>Pairing Gap</small>
-              <strong>2,628</strong>
-            </article>
-            <article class="kpi">
-              <small>Pairing Uptake</small>
-              <strong>63.0%</strong>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>EID Testing</h3>
-        </div>
-        <div class="kpis eid-cascade">
-          <article class="kpi">
-            <small>1st DNA PCR (0-2 weeks)</small>
-            <strong>4,476</strong>
-            <span class="delta-meta">Gap: 2,628 (37.0%) | Base denominator: Total HEI<span style="font-size: 0.7em;">s</span></span>
-          </article>
-          <article class="kpi">
-            <small>2nd DNA PCR (6-8 weeks)</small>
-            <strong>6,238</strong>
-            <span class="delta-meta">Gap: 716 (10.3%)</span>
-          </article>
-          <article class="kpi">
-            <small>3rd DNA PCR (6 Months)</small>
-            <strong>5,312</strong>
-            <span class="delta-meta">Gap: 1,522 (22.3%) | Next denominator reduced by 120 prior positives</span>
-          </article>
-          <article class="kpi high-gap">
-            <small>4th DNA PCR (12 Months)</small>
-            <strong>4,706</strong>
-            <span class="delta-meta">Gap: 2,033 (30.2%) | Next denominator reduced by 95 prior positives</span>
-          </article>
-          <article class="kpi critical-gap">
-            <small>Antibody HIV Test 18-24 Months</small>
-            <strong>3,986</strong>
-            <span class="delta-meta">Gap: 2,675 (40.2%) | Next denominator reduced by 78 prior positives</span>
-          </article>
-        </div>
-      </section>
-      <section class="tile-section" aria-label="Final Outcomes tiles">
-        <h3 class="tile-section-title">Final Outcomes</h3>
-        <div class="kpis">
-          <article class="kpi">
-            <small>Total HEI<span style="font-size: 0.7em;">s</span> Negative</small>
-            <strong>3,842</strong>
-          </article>
-          <article class="kpi">
-            <small>Total HEI<span style="font-size: 0.7em;">s</span> Positive</small>
-            <strong>82</strong>
-          </article>
-          <article class="kpi">
-            <small>Total HEI<span style="font-size: 0.7em;">s</span> Died</small>
-            <strong>62</strong>
-          </article>
-          <article class="kpi">
-            <small>Total HEI<span style="font-size: 0.7em;">s</span> LTFU</small>
-            <strong>3,118</strong>
-          </article>
-        </div>
-      </section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>Final Outcomes</h3>
-          <span>18 to 24 months</span>
-        </div>
-        <div class="cascade-chart">
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Total HEI</span><strong>7,104</strong></div>
-            <div class="cascade-bar" style="width:100%"></div>
-          </div>
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Negative</span><strong>3,842</strong></div>
-            <div class="cascade-bar" style="width:54.1%"></div>
-          </div>
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Positive</span><strong>82</strong></div>
-            <div class="cascade-bar amber" style="width:1.2%"></div>
-          </div>
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Died</span><strong>62</strong></div>
-            <div class="cascade-bar red" style="width:0.9%"></div>
-          </div>
-          <div class="cascade-step">
-            <div class="cascade-label"><span>LTFU</span><strong>3,118</strong></div>
-            <div class="cascade-bar risk" style="width:43.8%"></div>
-          </div>
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Undocumented</span><strong>345</strong></div>
-            <div class="cascade-bar" style="width:4.9%"></div>
-          </div>
-        </div>
-      </section>
-      <section class="panel section-gap" aria-label="Early infant diagnosis glossary">
-        <div class="panel-header">
-          <h3>Glossary</h3>
-        </div>
-        <div class="table-scroll">
-          <table class="indicator-table glossary-table">
-            <thead>
-              <tr>
-                <th>Indicator</th>
-                <th>Description</th>
-                <th>Numerator</th>
-                <th>Denominator</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Total HEIs</td>
-                <td>Total number of HIV-exposed infants enrolled in EID care.</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Total Paired HEIs</td>
-                <td>Number of HEIs with linked mother-baby records.</td>
-                <td>Total HEIs paired to maternal records</td>
-                <td>Total HEIs</td>
-              </tr>
-              <tr>
-                <td>Pairing Gap</td>
-                <td>HEIs not linked to maternal records.</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Pairing Uptake</td>
-                <td>Proportion of HEIs paired to maternal records.</td>
-                <td>Total Paired HEIs</td>
-                <td>Total HEIs</td>
-              </tr>
-              <tr>
-                <td>1st DNA PCR (0-2 weeks)</td>
-                <td>HEIs tested with first DNA PCR at age 0-2 weeks.</td>
-                <td>Total HEIs tested at 0-2 weeks</td>
-                <td>Total eligible HEIs at this age point</td>
-              </tr>
-              <tr>
-                <td>2nd DNA PCR (6-8 weeks)</td>
-                <td>HEIs tested with second DNA PCR at age 6-8 weeks.</td>
-                <td>Total HEIs tested at 6-8 weeks</td>
-                <td>Total eligible HEIs at this age point</td>
-              </tr>
-              <tr>
-                <td>3rd DNA PCR (6 Months)</td>
-                <td>HEIs tested with DNA PCR at age 6 months.</td>
-                <td>Total HEIs tested at 6 months</td>
-                <td>Total eligible HEIs at this age point</td>
-              </tr>
-              <tr>
-                <td>4th DNA PCR (12 Months)</td>
-                <td>HEIs tested with DNA PCR at age 12 months.</td>
-                <td>Total HEIs tested at 12 months</td>
-                <td>Total eligible HEIs at this age point</td>
-              </tr>
-              <tr>
-                <td>Antibody HIV Test 18-24 Months</td>
-                <td>HEIs receiving antibody HIV test at age 18-24 months.</td>
-                <td>Total HEIs tested at 18-24 months</td>
-                <td>Total eligible HEIs at this age point</td>
-              </tr>
-              <tr>
-                <td>Total HEIs Negative</td>
-                <td>HEIs with final documented HIV-negative outcome.</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Total HEIs Positive</td>
-                <td>HEIs with final documented HIV-positive outcome.</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Total HEIs Died</td>
-                <td>HEIs with documented death during follow-up.</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Total HEIs LTFU</td>
-                <td>HEIs lost to follow-up before final documented outcome.</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Undocumented</td>
-                <td>HEIs with no final documented outcome by end of reporting period.</td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>Newly Started On ART</h4>
+                <p>3,436</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Males Started On ART</h4>
+                <p>1,187 <span class="hiv-share">35%</span></p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Females Started On ART</h4>
+                <p>2,249 <span class="hiv-share">65%</span></p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Adults Started On ART (15+ Yrs)</h4>
+                <p>3,320 <span class="hiv-share">97%</span></p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Children Started On ART (1-14 Yrs)</h4>
+                <p>116 <span class="hiv-share">3%</span></p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Adolescents Started On ART (10-19 Yrs)</h4>
+                <p>135 <span class="hiv-share">4%</span></p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>AYPs Started On ART (10-24 Yrs)</h4>
+                <p>618 <span class="hiv-share">18%</span></p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Young Adult Started On ART (15-24 Yrs)</h4>
+                <p>590 <span class="hiv-share">17%</span></p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Proportion Newly Started on ART Receiving CD4 Test</h4>
+                <p>2,748 <span class="hiv-share">80%</span></p>
+              </article>
+            </div>
 
-    <div class="tab-panel" id="viral-load-data">
-      <section class="title-row"><div><h2>VIRAL LOAD</h2></div></section>
-      <section class="definition"><h3>Definition of terms</h3><ul><li>Viral Load Uptake: Progress from currently on maternal HAART to eligible and then valid viral load results.</li><li>Viral Load Suppression: Distribution of valid viral load results into suppressed and unsuppressed outcomes.</li><li>Suppressed (&lt;=50 copies/mL): Lower transmission risk category.</li><li>Unsuppressed (&gt;50 copies/mL): Higher transmission risk category requiring enhanced adherence and clinical follow-up.</li></ul></section>
-      <section class="tile-section" aria-label="Viral Load Uptake tiles">
-        <h3 class="tile-section-title">Viral Load Uptake</h3>
-        <div class="kpis">
-          <article class="kpi">
-            <small>Currently on Maternal HAART</small>
-            <strong>6,936</strong>
-          </article>
-          <article class="kpi">
-            <small>Eligible for Viral Load</small>
-            <strong>6,780</strong>
-          </article>
-          <article class="kpi">
-            <small>Valid Viral Load</small>
-            <strong>5,884</strong>
-          </article>
-          <article class="kpi">
-            <small>VTP New Positive</small>
-            <strong>1,126</strong>
-          </article>
-          <article class="kpi">
-            <small>Pre-Treatment Viral Load</small>
-            <strong>724</strong>
-          </article>
-        </div>
-      </section>
-      <section class="panel section-gap" aria-label="Viral Load Uptake cascade">
-        <div class="panel-header">
-          <h3>Viral Load Uptake</h3>
-          <span>3-step cascade</span>
-        </div>
-        <div class="cascade-chart">
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Currently on Maternal HAART</span><strong>6,936</strong></div>
-            <div class="cascade-bar" style="width:100%"></div>
-          </div>
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Eligible for Viral Load</span><strong>6,780 <small>(97.8%)</small></strong></div>
-            <div class="cascade-bar" style="width:97.8%"></div>
-          </div>
-          <div class="cascade-step">
-            <div class="cascade-label"><span>Valid Viral Load</span><strong>5,884 <small>(86.8%)</small></strong></div>
-            <div class="cascade-bar amber" style="width:84.8%"></div>
-          </div>
-        </div>
-      </section>
-      <section class="tile-section section-gap" aria-label="Viral Load Suppression tiles">
-        <h3 class="tile-section-title">Viral Load Outcomes</h3>
-        <div class="kpis">
-          <article class="kpi">
-            <small>Suppressed &lt;=50 Copies</small>
-            <strong>4,108</strong>
-          </article>
-          <article class="kpi">
-            <small>Unsuppressed &gt;50 Copies</small>
-            <strong>1,776</strong>
-          </article>
-        </div>
-      </section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>Viral Load Outcomes</h3>
-          <span>Suppression status</span>
-        </div>
-        <div class="suppression-pie-wrap">
-          <div class="suppression-pie" style="--suppressed: 69.8" role="img" aria-label="Viral load suppression pie chart: 69.8 percent suppressed and 30.2 percent unsuppressed.">
-            <div class="suppression-pie-center">
-              <strong>5,884</strong>
-              <small>Valid Viral Load</small>
-            </div>
-          </div>
-          <div class="suppression-legend" aria-label="Viral load suppression indicators">
-            <div class="suppression-legend-item">
-              <span class="suppression-swatch suppressed" aria-hidden="true"></span>
-              <div>
-                <strong>Low risk, suppressed: &lt;=50 copies</strong>
-                <small>4,108 of 5,884</small>
-              </div>
-              <span class="tag watch">69.8%</span>
-            </div>
-            <div class="suppression-legend-item">
-              <span class="suppression-swatch unsuppressed" aria-hidden="true"></span>
-              <div>
-                <strong>High risk, unsuppressed: &gt;50 copies</strong>
-                <small>1,776 of 5,884</small>
-              </div>
-              <span class="tag risk">30.2%</span>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="panel section-gap" aria-label="Viral load glossary">
-        <div class="panel-header">
-          <h3>Glossary</h3>
-        </div>
-        <div class="table-scroll">
-          <table class="indicator-table glossary-table">
-            <thead>
-              <tr>
-                <th>Indicator</th>
-                <th>Description</th>
-                <th>Numerator</th>
-                <th>Denominator</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Viral Load Data</td>
-                <td>Viral load uptake and viral load suppression indicators for maternal HAART and VTP new positive clients.</td>
-                <td>Valid viral load records captured in the reporting period</td>
-                <td>All eligible maternal HAART and VTP new positive clients</td>
-              </tr>
-              <tr>
-                <td>Currently on Maternal HAART</td>
-                <td>Pregnant or breastfeeding women currently receiving maternal HAART, including known positives and those newly started on treatment.</td>
-                <td>Pregnant or breastfeeding women on maternal HAART</td>
-                <td>Total pregnant or breastfeeding women living with HIV</td>
-              </tr>
-              <tr>
-                <td>Eligible for Viral Load</td>
-                <td>Clients due for a viral load test based on schedule or clinical indication.</td>
-                <td>Clients due for viral load testing</td>
-                <td>All clients eligible for viral load in the period</td>
-              </tr>
-              <tr>
-                <td>Valid Viral Load</td>
-                <td>Viral load results that are documented, reportable, and usable for clinical monitoring in the reporting period.</td>
-                <td>Valid viral load results received</td>
-                <td>All viral load results received</td>
-              </tr>
-              <tr>
-                <td>VTP New Positive</td>
-                <td>Clients newly identified as HIV positive within the VTP reporting period.</td>
-                <td>Newly identified HIV positive clients</td>
-                <td>All VTP clients tested</td>
-              </tr>
-              <tr>
-                <td>Pre-Treatment Viral Load</td>
-                <td>Baseline viral load done before ART initiation for newly identified positive clients.</td>
-                <td>Baseline viral load completed before ART initiation</td>
-                <td>Newly identified positive clients before ART start</td>
-              </tr>
-              <tr>
-                <td>Suppressed &lt;=50 Copies</td>
-                <td>Viral load result of 50 copies/mL or lower, indicating lower transmission risk.</td>
-                <td>Clients with viral load &lt;=50 copies/mL</td>
-                <td>All valid viral load results</td>
-              </tr>
-              <tr>
-                <td>Unsuppressed &gt;50 Copies</td>
-                <td>Viral load result above 50 copies/mL, indicating higher transmission risk and need for enhanced adherence and clinical follow-up.</td>
-                <td>Clients with viral load &gt;50 copies/mL</td>
-                <td>All valid viral load results</td>
-              </tr>
-              <tr>
-                <td>Eligible for Viral Load Schedule</td>
-                <td>Clients meeting schedule-based viral load eligibility: at pregnancy confirmation, 3 months after regimen change or enhanced adherence counselling, and every 6 months through pregnancy and breastfeeding.</td>
-                <td>Clients meeting schedule-based eligibility criteria</td>
-                <td>Pregnant or breastfeeding women on maternal HAART</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+            <div class="hiv-chart-grid">
+              <section class="hiv-chart">
+                <h4>Newly Started on ART by Sex</h4>
+                <div id="chart-newly-sex" class="chart-host"></div>
+              </section>
 
-    <div class="tab-panel" id="prep">
-      <section class="title-row"><div><h2>PREP</h2></div></section>
-      <section class="definition"><h3>Definition of terms</h3><ul><li>Screened for PreP: Clients assessed for PrEP eligibility.</li><li>Eligible for PreP: Screened clients meeting PrEP eligibility criteria.</li><li>Initiated on PrEP: Eligible clients started on PrEP.</li><li>Continuing on PrEP: Clients retained on PrEP during follow-up.</li><li>Total PrEP Clients by Pregnancy Status and Regimen: Distribution of PrEP clients by pregnancy status and regimen type.</li></ul></section>
-      <section class="panel section-gap">
-        <div class="panel-header">
-          <h3>PrEP</h3>
-          <span>Coming next</span>
+              <section class="hiv-chart">
+                <h4>Distribution of Patients Newly Started on ART by Age and Sex</h4>
+                <div id="chart-age-sex" class="chart-host"></div>
+              </section>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>Trends of Newly Started Patients on ART</h4>
+                <div id="chart-trend-newly" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>New on Treatment Compared to HTS Positives</h4>
+                <div id="chart-new-vs-hts" class="chart-host"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="view-tpt" class="hiv-view" role="tabpanel" aria-labelledby="tab-tpt">
+            <div class="hiv-banner">TPT</div>
+
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>Newly Initiated on TPT</h4>
+                <p>3,150</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Ever on TPT</h4>
+                <p>845,000</p>
+              </article>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>Newly Initiated on ART vs Newly Initiated on TPT</h4>
+                <div id="chart-tpt-new-vs-art" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>Tx_Curr vs Ever on TPT</h4>
+                <div id="chart-tpt-ever-vs-txcurr" class="chart-host"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="view-current-on-art" class="hiv-view" role="tabpanel" aria-labelledby="tab-current-on-art">
+            <div class="hiv-banner">Current On ART</div>
+            <div class="hiv-placeholder">Current on ART metrics and trend charts will appear in this tab.</div>
+          </section>
+
+          <section id="view-art-optimization" class="hiv-view" role="tabpanel" aria-labelledby="tab-art-optimization">
+            <div class="hiv-banner">ART Regimen</div>
+
+            <div class="hiv-definition">Adults</div>
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>Adults on Initial Regimen</h4>
+                <p>596,240</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Adults on Subsequent Regimen</h4>
+                <p>492,810</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Adults on Constructive Regimen</h4>
+                <p>22,607</p>
+              </article>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>ART Regimen Adults - Proportion of Adults by Regimen</h4>
+                <div id="chart-art-regimen-adults" class="chart-host"></div>
+              </section>
+            </div>
+
+            <div class="hiv-definition">CALHIV</div>
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>CALHIV on Initial Regimen</h4>
+                <p>16,420</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>CALHIV on Subsequent Regimen</h4>
+                <p>8,940</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>CALHIV on Constructive Regimen</h4>
+                <p>1,220</p>
+              </article>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>Proportion of CALHIV by Regimen</h4>
+                <div id="chart-art-regimen-calhiv" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>Regimen Distribution Based on Weight Bands</h4>
+                <div id="chart-art-regimen-weight-bands" class="chart-host"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="view-adverse-events" class="hiv-view" role="tabpanel" aria-labelledby="tab-adverse-events">
+            <div class="hiv-banner">Adverse Drug Reactions Reported</div>
+
+            <div class="hiv-chart-grid">
+              <section class="hiv-chart">
+                <h4>Reaction</h4>
+                <div id="chart-ae-reaction" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-chart">
+                <h4>Severity/Grading</h4>
+                <div id="chart-ae-severity" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-chart">
+                <h4>Suspected Molecule</h4>
+                <div id="chart-ae-molecule" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-chart">
+                <h4>Action Taken</h4>
+                <div id="chart-ae-action" class="chart-host"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="view-dsd" class="hiv-view" role="tabpanel" aria-labelledby="tab-dsd">
+            <div class="hiv-banner">DSD</div>
+
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>Current on ART</h4>
+                <p>1,139,605</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Established Patients</h4>
+                <p>982,440</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Patients on Facility Model</h4>
+                <p>678,520</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Patients on Community Models</h4>
+                <p>461,085</p>
+              </article>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>Facility DSD Models - Less Intense and More Intense</h4>
+                <div id="chart-dsd-facility-models" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>Community DSD Models</h4>
+                <div id="chart-dsd-community-models" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>ART Distribution by Months</h4>
+                <div id="chart-dsd-art-months" class="chart-host"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="view-vl-monitoring" class="hiv-view" role="tabpanel" aria-labelledby="tab-vl-monitoring">
+            <div class="hiv-banner">VL Monitoring</div>
+
+            <div class="vl-subtabs" role="tablist" aria-label="Viral Load Monitoring Tabs">
+              <button id="vl-tab-uptake" class="vl-tab active" data-target="vl-view-uptake" type="button" role="tab" aria-controls="vl-view-uptake" aria-selected="true">Viral Load Uptake</button>
+              <button id="vl-tab-outcomes-unsupressed" class="vl-tab" data-target="vl-view-outcomes-unsupressed" type="button" role="tab" aria-controls="vl-view-outcomes-unsupressed" aria-selected="false">Viral Load Outcomes Unsupressed</button>
+            </div>
+
+            <section id="vl-view-uptake" class="vl-view active" role="tabpanel" aria-labelledby="vl-tab-uptake">
+              <div class="hiv-kpis">
+                <article class="hiv-kpi">
+                  <h4>PLHIV</h4>
+                  <p>1,139,605</p>
+                </article>
+                <article class="hiv-kpi">
+                  <h4>Eligible for VL</h4>
+                  <p>1,127,762 <span class="hiv-share">99%</span></p>
+                </article>
+                <article class="hiv-kpi">
+                  <h4>VL Done</h4>
+                  <p>861,315 <span class="hiv-share">76%</span></p>
+                </article>
+                <article class="hiv-kpi">
+                  <h4>Virally Suppressed</h4>
+                  <p>824,099 <span class="hiv-share">96%</span></p>
+                </article>
+              </div>
+
+              <div class="hiv-extra-charts">
+                <section class="hiv-wide-chart">
+                  <h4>OVERALL VL UPTAKE AND SUPPRESSION AMONG CURRENT ON ART PATIENTS</h4>
+                  <div id="chart-vl-overall" class="chart-host"></div>
+                </section>
+
+                <section class="hiv-wide-chart">
+                  <h4>MEDIAN TIME TO 1ST VL AFTER ART INITIATION BY YEAR OF ART INITIATION</h4>
+                  <div id="chart-vl-median-year" class="chart-host"></div>
+                </section>
+
+                <section class="hiv-wide-chart">
+                  <h4>VL UPTAKE BY AGE GROUP</h4>
+                  <div id="chart-vl-age-group" class="chart-host"></div>
+                </section>
+
+                <section class="hiv-wide-chart">
+                  <h4>VL UPTAKE BY COUNTY</h4>
+                  <div id="chart-vl-county" class="chart-host"></div>
+                </section>
+              </div>
+            </section>
+
+            <section id="vl-view-outcomes-unsupressed" class="vl-view" role="tabpanel" aria-labelledby="vl-tab-outcomes-unsupressed">
+              <div class="hiv-banner">Viral Load Outcomes Unsupressed</div>
+
+              <div class="hiv-definition">Definitions: LDL = &lt;=50, Suppressed =&gt; Patients who are current on treatment with valid viral load results of 50 - 199 copies/ml, LLVL =&gt; Patients who are current on treatment with valid viral load results of 200 - 999 copies/ml and Suspected treatment failure (STF) =&gt; Patients who are current on treatment with valid viral load results of 1000 and above copies/ml.</div>
+
+              <div class="hiv-kpis">
+                <article class="hiv-kpi">
+                  <h4>Suppressed</h4>
+                  <p>756,210 <span class="hiv-share">88%</span></p>
+                </article>
+                <article class="hiv-kpi">
+                  <h4>Unsuppressed</h4>
+                  <p>105,105 <span class="hiv-share">12%</span></p>
+                </article>
+              </div>
+
+              <div class="hiv-extra-charts">
+                <section class="hiv-wide-chart">
+                  <h4>Viral Load Suppression (LDL, Unsuppressed, STF) by Age and Sex</h4>
+                  <div id="chart-vl-outcomes-age-sex" class="chart-host"></div>
+                </section>
+
+                <section class="hiv-wide-chart">
+                  <h4>Viral Suppression (Less Than 200 CPM) Among Current on ART Patients by Age Group</h4>
+                  <div id="chart-vl-suppression-age-group" class="chart-host"></div>
+                </section>
+
+                <section class="hiv-wide-chart">
+                  <h4>VL Suppression by County</h4>
+                  <div id="chart-vl-suppression-county" class="chart-host"></div>
+                </section>
+
+                <section class="hiv-wide-chart">
+                  <h4>Number of Patients with High Viral Load - By Facility</h4>
+                  <div class="facility-table-wrap">
+                    <table class="facility-table" aria-label="High viral load by facility">
+                      <thead>
+                        <tr>
+                          <th>Facility</th>
+                          <th>High Viral Load</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Kenyatta National Hospital</td><td>1,260</td></tr>
+                        <tr><td>Mbagathi County Hospital</td><td>980</td></tr>
+                        <tr><td>Coast General Teaching and Referral</td><td>910</td></tr>
+                        <tr><td>Jaramogi Oginga Odinga Teaching and Referral</td><td>860</td></tr>
+                        <tr><td>Nakuru PGH</td><td>740</td></tr>
+                        <tr><td>Machakos Level 5</td><td>690</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </section>
+          </section>
+
+          <section id="view-treatment-outcomes" class="hiv-view" role="tabpanel" aria-labelledby="tab-treatment-outcomes">
+            <div class="hiv-banner">TREATMENT OUTCOMES by Cohort</div>
+
+            <div class="hiv-definition">Indicator Definition: Started ART includes patients with documented outcomes. Outcomes displayed are Alive, IIT and Dead.</div>
+
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>Started ART</h4>
+                <p>1357k</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Alive</h4>
+                <p>1,139,605</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>IIT</h4>
+                <p>164,920</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Dead</h4>
+                <p>52,455</p>
+              </article>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>ART Treatment Outcomes by Sex</h4>
+                <div id="chart-cohort-sex" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>ART Treatment Outcomes by Age Group</h4>
+                <div id="chart-cohort-age-group" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>ART Treatment Outcomes by County</h4>
+                <div id="chart-cohort-county" class="chart-host"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="view-ahd" class="hiv-view" role="tabpanel" aria-labelledby="tab-ahd">
+            <div class="hiv-banner">AHD</div>
+
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>At Risk of AHD</h4>
+                <p>142,860</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Newly Diagnosed</h4>
+                <p>3,436</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>IIT</h4>
+                <p>164,920</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>PLHIV Hospitalized</h4>
+                <p>18,420</p>
+              </article>
+              <article class="hiv-kpi">
+                <h4>Treatment Failure</h4>
+                <p>29,115</p>
+              </article>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>CD4 Testing for PLHIV with AHD Risk</h4>
+                <div id="chart-ahd-cd4-testing" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>Screening for CM and TB</h4>
+                <div id="chart-ahd-cm-tb-screening" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>Nutrition Assessment for AHD Adults</h4>
+                <div id="chart-ahd-nutrition-adults" class="chart-host"></div>
+              </section>
+
+              <section class="hiv-wide-chart">
+                <h4>AHD Outcomes</h4>
+                <div id="chart-ahd-outcomes" class="chart-host"></div>
+              </section>
+            </div>
+          </section>
+
+          <section id="view-ncd" class="hiv-view" role="tabpanel" aria-labelledby="tab-ncd">
+            <div class="hiv-banner">NCD</div>
+            <div class="hiv-definition">Cascade as listed below.</div>
+
+            <div class="hiv-kpis">
+              <article class="hiv-kpi">
+                <h4>Total PLHIV</h4>
+                <p>1,139,605</p>
+              </article>
+            </div>
+
+            <div class="hiv-extra-charts">
+              <section class="hiv-wide-chart">
+                <h4>NCD Cascade</h4>
+                <div id="chart-ncd-cascade" class="chart-host tall"></div>
+              </section>
+            </div>
+          </section>
         </div>
-        <div class="panel-body">
-          <p>PrEP indicators, initiation, continuation, and follow-up will be displayed here.</p>
-          <div class="kpis" style="margin-top: 1rem; display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
-            <article class="kpi">
-              <small>Screened for PreP</small>
-              <strong>5,420</strong>
-            </article>
-            <article class="kpi">
-              <small>Eligible for PreP</small>
-              <strong>1,980</strong>
-            </article>
-            <article class="kpi">
-              <small>Initiated on PrEP</small>
-              <strong>1,486</strong>
-            </article>
-            <article class="kpi">
-              <small>Continuing on PrEP</small>
-              <strong>1,214</strong>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section class="panel section-gap" aria-label="Total PrEP Clients By Pregnancy Status and Regimen">
-        <div class="panel-header">
-          <h3>Total PrEP Clients By Pregnancy Status &amp; Regimen</h3>
-          <span>Pivot table</span>
-        </div>
-        <div class="table-scroll">
-          <table class="indicator-table glossary-table">
-            <thead>
-              <tr>
-                <th>Pregnancy Status</th>
-                <th>TAF/FTC</th>
-                <th>TDF/FTC</th>
-                <th>TDF/3TC</th>
-                <th>Cab LA</th>
-                <th>LENACAPAVIR</th>
-                <th>Total (Sum)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Pregnant</td>
-                <td>1</td>
-                <td>95</td>
-                <td>4</td>
-                <td>9</td>
-                <td>11</td>
-                <td>120</td>
-              </tr>
-              <tr>
-                <td>Breastfeeding</td>
-                <td>1</td>
-                <td>64</td>
-                <td>3</td>
-                <td>6</td>
-                <td>7</td>
-                <td>81</td>
-              </tr>
-              <tr class="group">
-                <td>Total (Sum)</td>
-                <td>2</td>
-                <td>159</td>
-                <td>7</td>
-                <td>15</td>
-                <td>18</td>
-                <td>201</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+      </article>
+
+      <article id="service-desk" class="section-card">
+        <div aria-label="Service Desk workspace"></div>
+      </article>
+    </section>
   </main>
+
+  <footer class="footer-line">
+    <span>HMIS Statistics</span>
+    <span>copyright 2026 Palladium Group (Mockup)</span>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">Top</button>
+
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+
   <script>
-    const subTabs = document.querySelectorAll('.subtab');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    const hivTreatmentTabs = document.querySelectorAll('.ht-tab');
-    const hivTreatmentPanels = document.querySelectorAll('.ht-tab-panel');
+    let hivChartsInitialized = false;
 
-    subTabs.forEach((tab) => {
-      tab.addEventListener('click', (event) => {
-        event.preventDefault();
-        const panelId = tab.dataset.tab;
-
-        subTabs.forEach((item) => item.classList.remove('active'));
-        tabPanels.forEach((panel) => panel.classList.remove('active'));
-
-        tab.classList.add('active');
-        document.getElementById(panelId).classList.add('active');
-      });
-    });
-
-    hivTreatmentTabs.forEach((tab) => {
-      tab.addEventListener('click', (event) => {
-        event.preventDefault();
-        const panelId = tab.dataset.htTab;
-
-        if (!panelId) {
-          return;
-        }
-
-        hivTreatmentTabs.forEach((item) => item.classList.remove('active'));
-        hivTreatmentPanels.forEach((panel) => panel.classList.remove('active'));
-
-        tab.classList.add('active');
-        document.getElementById(panelId).classList.add('active');
-      });
-    });
-
-    const cohortYear = document.getElementById('cohort-year');
-    const cohortMonth = document.getElementById('cohort-month');
-
-    const monthOptions = {
-      '2026': ['Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026'],
-      '2025': ['Jan 2025', 'Feb 2025', 'Mar 2025', 'Apr 2025'],
-      '2024': ['Jan 2024', 'Feb 2024', 'Mar 2024', 'Apr 2024'],
-      '2023': ['Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023']
-    };
-
-    cohortYear.addEventListener('change', () => {
-      const selectedYear = cohortYear.value;
-      cohortMonth.innerHTML = '<option value="">Select month</option>';
-
-      if (selectedYear && monthOptions[selectedYear]) {
-        monthOptions[selectedYear].forEach((month) => {
-          const option = document.createElement('option');
-          option.value = month;
-          option.textContent = month;
-          cohortMonth.appendChild(option);
-        });
-        cohortMonth.style.display = 'block';
-      } else {
-        cohortMonth.style.display = 'none';
+    function initializeHivCharts() {
+      if (hivChartsInitialized || typeof Highcharts === "undefined") {
+        return;
       }
-    });
 
-    function alignDefinitionTerms() {
-      const definitionItems = document.querySelectorAll('.definition > ul > li');
+      hivChartsInitialized = true;
 
-      definitionItems.forEach((item) => {
-        if (item.querySelector(':scope > .def-term')) {
-          return;
-        }
+      const months12 = ["JUNE 2025", "JULY 2025", "AUGUST 2025", "SEPTEMBER 2025", "OCTOBER 2025", "NOVEMBER 2025", "DECEMBER 2025", "JANUARY 2026", "FEBRUARY 2026", "MARCH 2026", "APRIL 2026", "MAY 2026"];
+      const ageCats = ["Under 1", "01 to 04", "05 to 09", "10 to 14", "15 to 19", "20 to 24", "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49", "50 to 54", "55 to 59", "60 to 64", "65+"];
+      const femaleAge = [3, 28, 15, 16, 96, 410, 381, 371, 316, 227, 132, 117, 60, 48, 29];
+      const maleAge = [6, 29, 7, 12, 11, 73, 119, 185, 178, 188, 141, 103, 63, 37, 35];
+      const cohortAgeCats = ["0-4", "5-9", "10-14", "15-19", "20-24", "25-34", "35-44", "45+"];
+      const cohortCounties = ["Nairobi", "Kiambu", "Nakuru", "Kisumu", "Mombasa", "Kilifi", "Kakamega", "Homa Bay", "Migori", "Machakos"];
 
-        const raw = item.innerHTML;
-        const colonIndex = raw.indexOf(':');
+      Highcharts.chart("chart-newly-sex", {
+        chart: { type: "pie", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        colors: ["#ff3d8d", "#161059"],
+        tooltip: { pointFormat: "<b>{point.percentage:.1f}%</b>" },
+        plotOptions: { pie: { dataLabels: { enabled: true, format: "{point.name}: {point.percentage:.1f}%" } } },
+        series: [{ name: "Sex", data: [{ name: "Female", y: 65.5 }, { name: "Male", y: 34.5 }] }]
+      });
 
-        if (colonIndex === -1) {
-          return;
-        }
+      Highcharts.chart("chart-age-sex", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: ageCats, title: { text: null } },
+        yAxis: {
+          title: { text: "Number Positive" },
+          labels: {
+            formatter: function () {
+              return Math.abs(this.value);
+            }
+          }
+        },
+        tooltip: {
+          formatter: function () {
+            return "<b>" + this.series.name + "</b>: " + Math.abs(this.y);
+          }
+        },
+        legend: { reversed: false },
+        plotOptions: { series: { stacking: "normal" } },
+        series: [
+          { name: "Female", color: "#ff3d8d", data: femaleAge },
+          { name: "Male", color: "#161059", data: maleAge.map((v) => -v) }
+        ]
+      });
 
-        const term = raw.slice(0, colonIndex).trim();
-        const desc = raw.slice(colonIndex + 1).trim();
+      Highcharts.chart("chart-trend-newly", {
+        chart: { type: "line", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: months12, title: { text: "Months" } },
+        yAxis: { title: { text: "Number of Patients" }, min: 3000, max: 6500, tickInterval: 500 },
+        series: [{ name: "Number of Patients", color: "#00b9ab", data: [6208, 6026, 4909, 5090, 5607, 5478, 4559, 5939, 5443, 5202, 4615, 3436] }]
+      });
 
-        item.classList.add('def-aligned');
-        item.innerHTML = '<span class="def-term">' + term + '</span>' +
-          '<span class="def-colon">:</span>' +
-          '<span class="def-desc">' + desc + '</span>';
+      Highcharts.chart("chart-new-vs-hts", {
+        chart: { type: "line", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: ["JUNE 2025", "JULY 2025", "AUGUST 2025", "SEPTEMBER 2025", "OCTOBER 2025", "NOVEMBER 2025", "DECEMBER 2025", "JANUARY 2026", "FEBRUARY 2026", "MARCH 2026", "APRIL 2026"], title: { text: "Months" } },
+        yAxis: { title: { text: "Number of Patients" }, min: 0, max: 7000, tickInterval: 1000 },
+        series: [
+          { name: "Total New on Treatment", color: "#00b9ab", data: [6026, 4909, 5090, 5607, 5478, 4559, 5939, 5443, 5202, 4615, 3436] },
+          { name: "Total HTS Positives", color: "#ff3d8d", data: [4672, 3755, 3755, 4562, 4568, 3754, 4861, 4438, 4227, 3900, 2979] }
+        ]
+      });
+
+      Highcharts.chart("chart-tpt-new-vs-art", {
+        chart: { type: "line", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: months12, title: { text: "Months" } },
+        yAxis: { title: { text: "Patients" }, min: 0 },
+        series: [
+          { name: "Newly Initiated on ART", color: "#00b9ab", data: [6208, 6026, 4909, 5090, 5607, 5478, 4559, 5939, 5443, 5202, 4615, 3436] },
+          { name: "Newly Initiated on TPT", color: "#ef7f1a", data: [3800, 3725, 3450, 3520, 3605, 3580, 3400, 3490, 3380, 3300, 3210, 3150] }
+        ]
+      });
+
+      Highcharts.chart("chart-tpt-ever-vs-txcurr", {
+        chart: { type: "line", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: months12, title: { text: "Months" } },
+        yAxis: { title: { text: "Patients" }, min: 0 },
+        series: [
+          { name: "Tx_Curr", color: "#161059", data: [1092000, 1097500, 1101200, 1105800, 1110400, 1113300, 1117200, 1120500, 1124200, 1127800, 1131800, 1139605] },
+          { name: "Ever on TPT", color: "#ff3d8d", data: [780000, 786500, 792000, 798500, 804500, 810000, 816000, 822500, 828000, 834000, 839000, 845000] }
+        ]
+      });
+
+      Highcharts.chart("chart-cohort-sex", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: ["Male", "Female"], title: { text: "Sex" } },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        plotOptions: { column: { stacking: "normal" } },
+        series: [
+          { name: "Alive", color: "#00b9ab", data: [404060, 735545] },
+          { name: "IIT", color: "#ef7f1a", data: [65310, 99610] },
+          { name: "Dead", color: "#161059", data: [22510, 29945] }
+        ]
+      });
+
+      Highcharts.chart("chart-cohort-age-group", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: cohortAgeCats, title: { text: "Age Group" } },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        plotOptions: { column: { stacking: "normal" } },
+        series: [
+          { name: "Alive", color: "#00b9ab", data: [9200, 13200, 19600, 47200, 126300, 351500, 314200, 258405] },
+          { name: "IIT", color: "#ef7f1a", data: [2100, 2600, 3800, 8200, 19100, 51800, 44700, 32620] },
+          { name: "Dead", color: "#161059", data: [700, 820, 1100, 2400, 6200, 15200, 14400, 11635] }
+        ]
+      });
+
+      Highcharts.chart("chart-cohort-county", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: { categories: cohortCounties, title: { text: "County" } },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        plotOptions: { series: { stacking: "normal" } },
+        series: [
+          { name: "Alive", color: "#00b9ab", data: [142200, 81200, 70600, 65800, 59400, 54600, 49700, 47200, 45100, 42100] },
+          { name: "IIT", color: "#ef7f1a", data: [21300, 11400, 9800, 9200, 8600, 7900, 7100, 6800, 6400, 5900] },
+          { name: "Dead", color: "#161059", data: [7200, 3900, 3400, 3200, 2900, 2700, 2400, 2300, 2100, 2000] }
+        ]
+      });
+
+      Highcharts.chart("chart-art-regimen-adults", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        exporting: { enabled: true },
+        xAxis: {
+          categories: ["Initial Regimen", "Subsequent Regimen", "Constructive Regimen"],
+          title: { text: "Regimen Line" }
+        },
+        yAxis: { min: 0, title: { text: "Adults Current on ART" } },
+        tooltip: {
+          pointFormatter: function () {
+            return "<span style=\"color:" + this.color + "\">●</span> " + this.category + ": <b>" + Highcharts.numberFormat(this.y, 0) + "</b><br/>";
+          }
+        },
+        series: [
+          {
+            name: "Adults",
+            colorByPoint: true,
+            colors: ["#161059", "#00b9ab", "#ef7f1a"],
+            data: [596240, 492810, 22607],
+            dataLabels: {
+              enabled: true,
+              formatter: function () {
+                return Highcharts.numberFormat(this.y, 0);
+              }
+            }
+          }
+        ]
+      });
+
+      Highcharts.chart("chart-art-regimen-calhiv", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        exporting: { enabled: true },
+        xAxis: {
+          categories: ["Initial Regimen", "Subsequent Regimen", "Constructive Regimen"],
+          title: { text: "Regimen Line" }
+        },
+        yAxis: { min: 0, title: { text: "CALHIV Current on ART" } },
+        series: [
+          {
+            name: "CALHIV",
+            colorByPoint: true,
+            colors: ["#161059", "#00b9ab", "#ef7f1a"],
+            data: [16420, 8940, 1220],
+            dataLabels: {
+              enabled: true,
+              formatter: function () {
+                return Highcharts.numberFormat(this.y, 0);
+              }
+            }
+          }
+        ]
+      });
+
+      Highcharts.chart("chart-art-regimen-weight-bands", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["<2 kgs", ">=2 kgs", "3 to <24.9 kg", ">=25 - 29 kg", ">=30 kgs"],
+          title: { text: "Weight Band" }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        legend: { enabled: true },
+        series: [
+          {
+            name: "Initial Regimen",
+            color: "#161059",
+            data: [180, 2400, 18300, 94200, 465000]
+          },
+          {
+            name: "Subsequent Regimen",
+            color: "#00b9ab",
+            data: [60, 1100, 9600, 57200, 424850]
+          },
+          {
+            name: "Constructive Regimen",
+            color: "#ef7f1a",
+            data: [10, 120, 680, 2900, 20117]
+          }
+        ]
+      });
+
+      Highcharts.chart("chart-ae-reaction", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Rash", "Nausea", "Dizziness", "Headache", "Vomiting", "Anemia"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Reports" } },
+        series: [{ name: "Reports", color: "#00b9ab", data: [185, 149, 121, 110, 92, 78] }]
+      });
+
+      Highcharts.chart("chart-ae-severity", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Grade 1", "Grade 2", "Grade 3", "Grade 4"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Reports" } },
+        series: [{ name: "Severity", color: "#ef7f1a", data: [278, 214, 96, 37] }]
+      });
+
+      Highcharts.chart("chart-ae-molecule", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["DTG", "EFV", "ATV/r", "AZT", "TDF", "LPV/r"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Reports" } },
+        series: [{ name: "Suspected Molecule", color: "#161059", data: [233, 162, 96, 84, 73, 55] }]
+      });
+
+      Highcharts.chart("chart-ae-action", {
+        chart: { type: "pie", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        tooltip: { pointFormat: "<b>{point.percentage:.1f}%</b>" },
+        plotOptions: { pie: { dataLabels: { enabled: true, format: "{point.name}: {point.percentage:.1f}%" } } },
+        series: [{
+          name: "Action Taken",
+          data: [
+            { name: "No Change", y: 42 },
+            { name: "Substituted", y: 28 },
+            { name: "Stopped", y: 18 },
+            { name: "Dose Adjusted", y: 12 }
+          ]
+        }]
+      });
+
+      Highcharts.chart("chart-vl-overall", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["PLHIV", "Eligible for VL", "VL done"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        series: [{
+          name: "Patients",
+          colorByPoint: true,
+          colors: ["#161059", "#00b9ab", "#ef7f1a"],
+          data: [1139605, 1127762, 861315],
+          dataLabels: {
+            enabled: true,
+            formatter: function () {
+              return Highcharts.numberFormat(this.y, 0);
+            }
+          }
+        }]
+      });
+
+      Highcharts.chart("chart-vl-median-year", {
+        chart: { type: "line", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+          title: { text: "Year of ART Initiation" }
+        },
+        yAxis: { min: 0, title: { text: "Median Months to 1st VL" } },
+        series: [{ name: "Median Time", color: "#00b9ab", data: [13.2, 11.8, 10.5, 8.9, 7.5, 6.8, 6.3, 5.9, 5.5] }]
+      });
+
+      Highcharts.chart("chart-vl-age-group", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["0-4", "5-9", "10-14", "15-19", "20-24", "25-34", "35-44", "45+"],
+          title: { text: "Age Group" }
+        },
+        yAxis: { min: 0, max: 100, title: { text: "VL Uptake (%)" } },
+        series: [{ name: "VL Uptake", color: "#161059", data: [63, 69, 72, 76, 79, 82, 84, 83] }]
+      });
+
+      Highcharts.chart("chart-vl-county", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Nairobi", "Kiambu", "Nakuru", "Kisumu", "Mombasa", "Kilifi", "Kakamega", "Homa Bay", "Migori", "Machakos"],
+          title: { text: "County" }
+        },
+        yAxis: { min: 0, max: 100, title: { text: "VL Uptake (%)" } },
+        series: [{ name: "VL Uptake", color: "#ff3d8d", data: [82, 81, 79, 78, 77, 75, 76, 74, 73, 75] }]
+      });
+
+      Highcharts.chart("chart-dsd-facility-models", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Facility Fast Track", "Facility Group", "Facility Differentiated Clinic", "Facility Refill"],
+          title: { text: "Facility DSD Model" }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        series: [
+          { name: "Less Intense", color: "#00b9ab", data: [182400, 104300, 96300, 127100] },
+          { name: "More Intense", color: "#161059", data: [32600, 28100, 21400, 16820] }
+        ]
+      });
+
+      Highcharts.chart("chart-dsd-community-models", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Community Pharmacy", "Community ART Distribution Points", "Individual ART Distribution"],
+          title: { text: "Community DSD Model" }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        series: [
+          { name: "Patients", color: "#ef7f1a", data: [154200, 173900, 132985] }
+        ]
+      });
+
+      Highcharts.chart("chart-dsd-art-months", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["<3", "3-5", "6+"],
+          title: { text: "Months of ART Distribution" }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        series: [
+          { name: "Patients", colorByPoint: true, colors: ["#161059", "#00b9ab", "#ef7f1a"], data: [158600, 368450, 612555] }
+        ]
+      });
+
+      Highcharts.chart("chart-vl-outcomes-age-sex", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["M 0-14", "F 0-14", "M 15-24", "F 15-24", "M 25-34", "F 25-34", "M 35+", "F 35+"],
+          title: { text: "Age and Sex" }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        plotOptions: { column: { stacking: "normal" } },
+        series: [
+          { name: "LDL", color: "#00b9ab", data: [7200, 6900, 35200, 38400, 85200, 101400, 156000, 172300] },
+          { name: "Unsuppressed", color: "#ef7f1a", data: [1900, 1700, 8400, 9100, 18100, 20100, 24100, 21805] },
+          { name: "STF", color: "#161059", data: [430, 390, 1800, 1950, 3900, 4200, 5200, 4635] }
+        ]
+      });
+
+      Highcharts.chart("chart-vl-suppression-age-group", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["0-4", "5-9", "10-14", "15-19", "20-24", "25-34", "35-44", "45+"],
+          title: { text: "Age Group" }
+        },
+        yAxis: { min: 0, max: 100, title: { text: "Suppression (%)" } },
+        series: [{ name: "Suppression <200 CPM", color: "#00b9ab", data: [77, 81, 84, 86, 88, 90, 91, 90] }]
+      });
+
+      Highcharts.chart("chart-vl-suppression-county", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Nairobi", "Kiambu", "Nakuru", "Kisumu", "Mombasa", "Kilifi", "Kakamega", "Homa Bay", "Migori", "Machakos"],
+          title: { text: "County" }
+        },
+        yAxis: { min: 0, max: 100, title: { text: "VL Suppression (%)" } },
+        series: [{ name: "VL Suppression", color: "#161059", data: [92, 91, 90, 89, 88, 87, 88, 86, 85, 87] }]
+      });
+
+      Highcharts.chart("chart-ahd-cd4-testing", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["At Risk", "CD4 Done", "CD4 with Results", "CD4 Results <200 or <25%"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        series: [{ name: "Patients", color: "#00b9ab", data: [142860, 125440, 119220, 58610] }]
+      });
+
+      Highcharts.chart("chart-ahd-cm-tb-screening", {
+        chart: { type: "bar", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["CD4 <200", "Blood CrAg - Pos", "Blood CrAg - Neg", "LP for CSF Analysis", "LF LAM - Pos", "LF LAM - Neg", "GeneXpert"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        plotOptions: { series: { stacking: "normal" } },
+        series: [
+          { name: "Positive", color: "#ef7f1a", data: [0, 14200, 0, 10280, 12410, 0, 8560] },
+          { name: "Negative", color: "#161059", data: [58610, 0, 44410, 0, 0, 46200, 0] }
+        ]
+      });
+
+      Highcharts.chart("chart-ahd-nutrition-adults", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Assessed", "Undernourished", "Managed", "Improved"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Adults" } },
+        series: [{ name: "Adults", color: "#00b9ab", data: [96400, 22850, 19800, 15220] }]
+      });
+
+      Highcharts.chart("chart-ahd-outcomes", {
+        chart: { type: "column", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Current Cohort"],
+          title: { text: null }
+        },
+        yAxis: { min: 0, title: { text: "Patients" } },
+        plotOptions: { column: { stacking: "normal" } },
+        series: [
+          { name: "Active", color: "#00b9ab", data: [102480] },
+          { name: "Died", color: "#161059", data: [11640] },
+          { name: "IIT", color: "#ef7f1a", data: [28740] }
+        ]
+      });
+
+      Highcharts.chart("chart-ncd-cascade", {
+        chart: { type: "heatmap", backgroundColor: "#fff" },
+        title: { text: null },
+        credits: { enabled: true },
+        xAxis: {
+          categories: ["Screening", "Diagnosis", "Treatment/Management", "Outcomes (VL Suppression)", "Controlled"],
+          title: { text: "Cascade Stage" }
+        },
+        yAxis: {
+          categories: ["Diabetes", "CaCx", "Breast", "Hypertension", "Chronic Kidney Disease", "Mental Health", "Obesity and Dyslipidemia"],
+          title: { text: "Condition" },
+          reversed: true
+        },
+        colorAxis: {
+          min: 35000,
+          max: 392000,
+          stops: [
+            [0, "#eef5ff"],
+            [0.45, "#86b8ff"],
+            [0.75, "#2f7ed8"],
+            [1, "#0b3f91"]
+          ]
+        },
+        tooltip: {
+          formatter: function () {
+            return "<b>" + this.series.yAxis.categories[this.point.y] + "</b><br/>" +
+              this.series.xAxis.categories[this.point.x] + ": <b>" + Highcharts.numberFormat(this.point.value, 0) + "</b>";
+          }
+        },
+        series: [{
+          name: "Patients",
+          borderWidth: 1,
+          borderColor: "#ffffff",
+          dataLabels: {
+            enabled: true,
+            color: "#0d1a23",
+            style: { textOutline: "none", fontSize: "9px" },
+            formatter: function () {
+              return Highcharts.numberFormat(this.point.value, 0);
+            }
+          },
+          data: [
+            [0, 0, 248000], [1, 0, 126000], [2, 0, 102600], [3, 0, 86400], [4, 0, 61200],
+            [0, 1, 214000], [1, 1, 96400], [2, 1, 76800], [3, 1, 64200], [4, 1, 43800],
+            [0, 2, 198000], [1, 2, 87200], [2, 2, 69400], [3, 2, 57900], [4, 2, 39400],
+            [0, 3, 392000], [1, 3, 208000], [2, 3, 164500], [3, 3, 136700], [4, 3, 98100],
+            [0, 4, 156000], [1, 4, 74200], [2, 4, 59300], [3, 4, 49800], [4, 4, 35700],
+            [0, 5, 171000], [1, 5, 88300], [2, 5, 69100], [3, 5, 58200], [4, 5, 42200],
+            [0, 6, 183000], [1, 6, 91500], [2, 6, 74400], [3, 6, 62100], [4, 6, 45100]
+          ]
+        }]
+      });
+
+    }
+
+    function setActiveHivTab(targetId) {
+      const tabs = document.querySelectorAll(".hiv-tab");
+      const views = document.querySelectorAll(".hiv-view");
+
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.target === targetId;
+        tab.classList.toggle("active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      views.forEach((view) => {
+        view.classList.toggle("active", view.id === targetId);
+      });
+
+      // Reflow charts when a hidden tab becomes visible.
+      if (typeof Highcharts !== "undefined" && Highcharts.charts) {
+        window.setTimeout(() => {
+          Highcharts.charts.forEach((chart) => {
+            if (chart && chart.renderTo && chart.renderTo.offsetParent !== null) {
+              chart.reflow();
+            }
+          });
+        }, 60);
+      }
+    }
+
+    function updateActiveTopNav() {
+      const current = window.location.hash || "#home";
+      document.querySelectorAll(".top-nav a").forEach((link) => {
+        const href = link.getAttribute("href");
+        const isHivTreatment = href === "#hiv-treatment/newly-started" && current.startsWith("#hiv-treatment");
+        link.classList.toggle("active", href === current || isHivTreatment);
       });
     }
 
-    alignDefinitionTerms();
+    function updatePageViewByHash() {
+      const hash = window.location.hash || "#home";
+      const showHivTreatment = hash.startsWith("#hiv-treatment");
+      document.body.classList.toggle("show-hiv-treatment", showHivTreatment);
+    }
+
+    function applyHashDrivenHivTab() {
+      const hash = window.location.hash || "";
+      if (!hash.startsWith("#hiv-treatment")) {
+        return;
+      }
+
+      const slug = hash.includes("/") ? hash.split("/")[1] : "newly-started";
+      const tab = document.querySelector('.hiv-tab[data-slug="' + slug + '"]') || document.querySelector('.hiv-tab[data-slug="newly-started"]');
+      if (tab) {
+        setActiveHivTab(tab.dataset.target);
+      }
+
+      const hivTreatmentSection = document.getElementById("hiv-treatment");
+      if (hivTreatmentSection) {
+        hivTreatmentSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    document.querySelectorAll(".hiv-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        setActiveHivTab(tab.dataset.target);
+        const slug = tab.dataset.slug || "newly-started";
+        window.history.replaceState(null, "", "#hiv-treatment/" + slug);
+        updateActiveTopNav();
+      });
+
+      tab.addEventListener("keydown", (event) => {
+        const tabs = Array.from(document.querySelectorAll(".hiv-tab"));
+        const currentIndex = tabs.indexOf(tab);
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          tabs[(currentIndex + 1) % tabs.length].focus();
+        }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          tabs[(currentIndex - 1 + tabs.length) % tabs.length].focus();
+        }
+        if (event.key === "Home") {
+          event.preventDefault();
+          tabs[0].focus();
+        }
+        if (event.key === "End") {
+          event.preventDefault();
+          tabs[tabs.length - 1].focus();
+        }
+      });
+    });
+
+    function setActiveVlTab(targetId) {
+      const tabs = document.querySelectorAll(".vl-tab");
+      const views = document.querySelectorAll(".vl-view");
+
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.target === targetId;
+        tab.classList.toggle("active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      views.forEach((view) => {
+        view.classList.toggle("active", view.id === targetId);
+      });
+
+      if (typeof Highcharts !== "undefined" && Highcharts.charts) {
+        window.setTimeout(() => {
+          Highcharts.charts.forEach((chart) => {
+            if (chart && chart.renderTo && chart.renderTo.offsetParent !== null) {
+              chart.reflow();
+            }
+          });
+        }, 60);
+      }
+    }
+
+    document.querySelectorAll(".vl-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        setActiveVlTab(tab.dataset.target);
+      });
+
+      tab.addEventListener("keydown", (event) => {
+        const tabs = Array.from(document.querySelectorAll(".vl-tab"));
+        const currentIndex = tabs.indexOf(tab);
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          tabs[(currentIndex + 1) % tabs.length].focus();
+        }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          tabs[(currentIndex - 1 + tabs.length) % tabs.length].focus();
+        }
+      });
+    });
+
+    window.addEventListener("hashchange", () => {
+      updatePageViewByHash();
+      updateActiveTopNav();
+      applyHashDrivenHivTab();
+    });
+    updatePageViewByHash();
+    updateActiveTopNav();
+    applyHashDrivenHivTab();
+
+    const hivTreatmentNavLink = document.querySelector('.top-nav a[href="#hiv-treatment/newly-started"]');
+    if (hivTreatmentNavLink) {
+      hivTreatmentNavLink.addEventListener("click", () => {
+        document.body.classList.add("show-hiv-treatment");
+        setActiveHivTab("view-newly-started");
+        initializeHivCharts();
+        window.history.replaceState(null, "", "#hiv-treatment/newly-started");
+        updateActiveTopNav();
+      });
+    }
+
+    const backToTopButton = document.getElementById("back-to-top");
+    if (backToTopButton) {
+      window.addEventListener("scroll", () => {
+        backToTopButton.classList.toggle("visible", window.scrollY > 360);
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    initializeHivCharts();
   </script>
 </body>
 </html>
